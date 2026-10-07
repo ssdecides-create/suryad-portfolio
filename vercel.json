@@ -1,0 +1,56 @@
+{
+  "headers": [
+    {
+      "source": "/opt/(web|slots)/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=604800, stale-while-revalidate=2592000"
+        }
+      ]
+    },
+    {
+      "source": "/(support|skeleton|image-slot)\\.js",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400, stale-while-revalidate=604800"
+        }
+      ]
+    },
+    {
+      "source": "/opt/(.*)\\.js",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400, stale-while-revalidate=604800"
+        }
+      ]
+    },
+    {
+      "source": "/opt/SuryaD_LeadProductDesigner_Resume.pdf",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/pdf"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/Surya%20Portfolio.dc.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/Surya Portfolio.dc.html",
+      "destination": "/",
+      "permanent": true
+    }
+  ]
+}

@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>html,body{background:#171717;margin:0}</style>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preload" as="image" href="opt/web/pasted-1790698455834-0.webp" fetchpriority="high">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&amp;family=Inter:wght@400;500;600&amp;family=Caveat:wght@500;600;700&amp;family=Comforter+Brush&amp;family=Mrs+Saint+Delafield&amp;display=swap" rel="stylesheet">
+  <style>
+    html { scroll-behavior: smooth; }
+    body { margin: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+    * { box-sizing: border-box; }
+    a { color: #F67C29; }
+    a:hover { color: #FFA35C; }
+    image-slot[data-loaded][data-filled]::part(frame) { background: transparent; }
+    @keyframes testimonial-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .testimonial-track { animation: testimonial-scroll 60s linear infinite; }
+    .testimonial-track:hover { animation-play-state: paused; }
+    @keyframes photo-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .photo-track { animation: photo-scroll 34s linear infinite; }
+    .photo-track:hover { animation-play-state: paused; }
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.8s cubic-bezier(.16,.84,.44,1), transform 0.8s cubic-bezier(.16,.84,.44,1); }
+    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+    .reveal-img { opacity: 0; transform: translateY(20px) scale(0.97); transition: opacity 0.9s cubic-bezier(.16,.84,.44,1), transform 0.9s cubic-bezier(.16,.84,.44,1); }
+    .reveal-img.is-visible { opacity: 1; transform: translateY(0) scale(1); }
+    .reveal-fade { opacity: 0; transition: opacity 1s ease; }
+    .reveal-fade.is-visible { opacity: 1; }
+    a, button { transition: color 0.3s ease, background-color 0.35s ease, border-color 0.3s ease, transform 0.35s cubic-bezier(.16,.84,.44,1), box-shadow 0.35s cubic-bezier(.16,.84,.44,1), opacity 0.3s ease; }
+    nav a[href="#top"]:hover img, nav a[href$="#top"]:hover img { transform: scale(1.08) rotate(-4deg); }
+    nav img { transition: transform 0.4s cubic-bezier(.16,.84,.44,1); }
+    image-slot { transition: transform 0.6s cubic-bezier(.16,.84,.44,1), filter 0.4s ease; }
+    image-slot:hover { transform: scale(1.025); }
+    div[style*="border:1px solid rgba(224,223,191,0.15)"][style*="border-radius:16px"] { transition: transform 0.35s cubic-bezier(.16,.84,.44,1), box-shadow 0.35s ease, border-color 0.35s ease; }
+    div[style*="border:1px solid rgba(224,223,191,0.15)"][style*="border-radius:16px"]:hover { transform: translateY(-4px); box-shadow: 0 16px 34px rgba(0,0,0,0.35); border-color: rgba(246,124,41,0.4); }
+    :focus-visible { outline: 2px solid #F67C29; outline-offset: 3px; border-radius: 4px; }
+    @media (min-width: 901px) and (max-width: 1300px) { .home-hero-img { transform: none !important; top: 0 !important; bottom: 0 !important; height: 100% !important; max-height: none !important; object-fit: cover !important; left: auto !important; right: 0 !important; width: 56% !important; object-position: 64% center !important; -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 28%) !important; mask-image: linear-gradient(90deg, transparent 0%, #000 28%) !important; } .home-hero-shade { background: linear-gradient(90deg, #120A06 0%, rgba(18,10,6,0.85) 40%, rgba(18,10,6,0) 58%) !important; } .home-hero-copy { flex-basis: 44vw !important; } }
+    @media (max-width: 900px) { #top { align-items: flex-start !important; } .home-hero-shade { background: linear-gradient(180deg, rgba(18,10,6,0.35) 0px, rgba(18,10,6,0) 90px, rgba(18,10,6,0) calc(min(118vw, 620px) * 0.55), rgba(18,10,6,0.85) calc(min(118vw, 620px) * 0.88), #120A06 min(118vw, 620px), #120A06 100%) !important; } .home-hero-img { top: 0 !important; left: 0 !important; right: 0 !important; bottom: auto !important; width: 100% !important; height: min(118vw, 620px) !important; max-height: none !important; object-fit: cover !important; -webkit-mask-image: none !important; mask-image: none !important; object-position: 80% 20% !important; transform: none !important; } .home-hero-copy { padding-top: calc(min(118vw, 620px) * 0.72) !important; } }
+    @keyframes pp-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+    .pp-scroll { scrollbar-width: none; } .pp-scroll::-webkit-scrollbar { display: none; }
+    @keyframes ltr-spin { to { transform: rotate(360deg); } }
+    @keyframes ltr-bob { 0%,100% { transform: translateY(0) rotate(-4deg); } 50% { transform: translateY(-4px) rotate(3deg); } }
+    @keyframes ltr-ping { 0% { transform: scale(1); opacity: .7; } 100% { transform: scale(2.3); opacity: 0; } }
+    @keyframes ltr-write { from { clip-path: inset(-10% 100% -10% 0); } to { clip-path: inset(-10% -2% -10% 0); } }
+    @keyframes ltr-tip { from { opacity: 0; transform: translate(8px,-50%) scale(.9); } to { opacity: 1; transform: translate(0,-50%) scale(1); } }
+    .ltr-badge { transition: transform .35s cubic-bezier(.2,1.3,.4,1), box-shadow .35s ease; }
+    .ltr-badge:hover { transform: scale(1.06); box-shadow: 0 18px 40px rgba(0,0,0,0.5), 0 0 0 6px rgba(246,124,41,0.12); }
+    .ltr-ring { animation: ltr-spin 14s linear infinite; transform-origin: 50% 50%; }
+    .ltr-badge:hover .ltr-ring { animation-duration: 5s; }
+    .ltr-env { animation: ltr-bob 3.2s ease-in-out infinite; }
+    .ltr-flap { transform-origin: 50% 0; transition: transform .45s cubic-bezier(.2,1.2,.4,1); }
+    .ltr-badge:hover .ltr-flap { transform: perspective(80px) rotateX(165deg); }
+    .ltr-ping { animation: ltr-ping 1.8s ease-out infinite; }
+    @keyframes ltr-tip-out { to { opacity: 0; transform: translate(8px,-50%) scale(.9); } }
+    .ltr-tip { opacity: 0; transform: translate(8px,-50%) scale(.92); transform-origin: right center; transition: opacity .3s ease, transform .4s cubic-bezier(.2,1.3,.4,1); pointer-events: none; }
+    .ltr-badge.is-unread .ltr-tip { animation: ltr-tip .55s cubic-bezier(.2,1.3,.4,1) 2.5s forwards, ltr-tip-out .4s ease 9s forwards; }
+    .ltr-badge:hover .ltr-tip, .ltr-badge:focus-visible .ltr-tip { animation: none; opacity: 1; transform: translate(0,-50%) scale(1); }
+    .ltr-root .ltr-scroll { scroll-behavior: smooth; }
+    .ltr-root { visibility: hidden; pointer-events: none; transition: visibility 0s linear .5s; }
+    .ltr-root.is-open { visibility: visible; pointer-events: auto; transition-delay: 0s; }
+    .ltr-backdrop { opacity: 0; transition: opacity .45s ease; }
+    .is-open .ltr-backdrop { opacity: 1; }
+    .ltr-card { opacity: 0; transform: translateY(90px) scale(.88) rotate(-3deg); transition: transform .8s cubic-bezier(.2,1.15,.3,1), opacity .35s ease; }
+    .is-open .ltr-card { opacity: 1; transform: none; }
+    .ltr-close { opacity: 0; transform: scale(.6) rotate(-90deg); transition: opacity .4s ease .25s, transform .45s cubic-bezier(.2,1.3,.4,1) .25s, background .2s ease; }
+    .is-open .ltr-close { opacity: 1; transform: none; }
+    .ltr-close:hover { background: rgba(246,124,41,0.9) !important; }
+    .ltr-tape { opacity: 0; transform: translate(-50%,-28px) rotate(-10deg) scale(1.25); transition: opacity .3s ease, transform .5s cubic-bezier(.2,1.4,.4,1); }
+    .is-open .ltr-tape { opacity: 1; transform: translate(-50%,0) rotate(-2deg); transition-delay: .55s; }
+    .ltr-photo { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .7s cubic-bezier(.2,1,.3,1); }
+    .is-open .ltr-photo { opacity: 1; transform: none; transition-delay: .35s; }
+    .ltr-meta { opacity: 0; transition: opacity .5s ease; }
+    .is-open .ltr-meta { opacity: 1; transition-delay: .75s; }
+    .ltr-line { clip-path: inset(-10% 100% -10% 0); }
+    .is-open .ltr-line { animation: ltr-write var(--dur, 1.4s) cubic-bezier(.45,.05,.55,.95) var(--delay, 1s) forwards; }
+    .ltr-para { clip-path: inset(-10% -2% 100% 0); }
+    .is-open .ltr-para { animation-name: ltr-write-p; animation-timing-function: linear; }
+    @keyframes ltr-write-p { from { clip-path: inset(-10% -2% 100% 0); } to { clip-path: inset(-10% -2% -10% 0); } }
+    .is-skip .ltr-line { animation-duration: .01s !important; animation-delay: 0s !important; }
+    .ltr-skip { opacity: 0; transform: translate(-50%, 12px); transition: opacity .35s ease, transform .35s ease, background .2s ease; }
+    .is-open .ltr-skip { opacity: 1; transform: translate(-50%, 0); transition-delay: 1s; }
+    .is-open.is-skip .ltr-skip, .is-open.is-done .ltr-skip { opacity: 0; transform: translate(-50%, 12px); pointer-events: none; transition-delay: 0s; }
+    @media (max-width: 640px) { .ltr-badge { width: 80px !important; height: 80px !important; right: 14px !important; bottom: 14px !important; } .ltr-tip { display: none !important; } .ltr-root { padding: 68px 12px 28px !important; } .ltr-scroll { padding: 36px 22px 72px !important; max-height: calc(100dvh - 104px) !important; border-radius: 12px !important; } .ltr-close { top: 12px !important; right: 12px !important; width: 44px !important; height: 44px !important; } .ltr-tape { width: 110px !important; height: 32px !important; top: -12px !important; } #letter-photo { aspect-ratio: 4/3 !important; } .ltr-meta { margin: 24px 0 14px !important; } .ltr-meta span:first-child { font-size: 22px !important; } .ltr-meta span:last-child { font-size: 18px !important; } .ltr-skip { font-size: 14px !important; padding: 12px 20px !important; bottom: -18px !important; white-space: nowrap; } }
+    @media (prefers-reduced-motion: reduce) { .ltr-ring, .ltr-env, .ltr-ping { animation: none; } .is-open .ltr-line { animation-duration: .01s; animation-delay: 0s; } }
+  .awards-track::-webkit-scrollbar{display:none}
+  </style>
+  <script src="./image-slot.js"></script>
+  <script src="./opt/net-status.js"></script>
+  <style>@media (max-width:640px){[data-nav-links]{display:none!important}[data-nav-burger]{display:inline-flex!important}[data-nav-pill]{width:100%!important;justify-content:space-between!important;flex-wrap:nowrap!important}}@media (min-width:641px){[data-nav-menu]{display:none!important}}</style>
+  <script src="skeleton.js"></script>
+<style>@media (max-width:640px){
+[data-nda-art],[data-hide-mobile]{display:none!important}
+[data-work-card]{flex-direction:column!important;align-items:stretch!important;min-height:0!important;background:#1C1A18;border:1px solid rgba(224,223,191,0.1);isolation:isolate;-webkit-transform:translateZ(0);transform:translateZ(0);-webkit-mask-image:-webkit-radial-gradient(white,black)}
+[data-work-img]{position:relative!important;inset:auto!important;height:auto!important;aspect-ratio:16/10!important;flex-shrink:0;display:block!important;overflow:hidden;margin:-1px -1px 0!important;width:calc(100% + 2px)!important}
+[data-work-img]::part(frame){background:#1C1A18!important;animation:none!important}
+[data-work-img]::part(image){left:50%!important;top:50%!important;width:calc(100% + 2px)!important;height:calc(100% + 2px)!important;object-fit:cover!important;object-position:center!important;backface-visibility:hidden}
+[data-work-shade]{display:none!important}
+[data-work-body]{padding:22px 20px 24px!important}
+[data-work-body] h3{margin-bottom:14px!important}
+[data-work-body]>div{margin-bottom:14px!important}
+[data-work-body] p{margin-bottom:18px!important}
+.testimonial-track>div{width:min(280px,76vw)!important;align-self:flex-start;padding:22px 20px!important;border-radius:18px!important}
+.testimonial-track>div>div:first-child{font-size:32px!important;margin-bottom:6px!important}
+.testimonial-track>div p{font-size:15px!important;line-height:1.5!important;min-height:0!important;margin-bottom:18px!important}
+.testimonial-track>div img{width:36px!important;height:36px!important}
+.testimonial-track{gap:16px!important;padding-right:16px!important;align-items:flex-start!important}
+[data-pp-grid]{grid-auto-columns:max-content!important}
+[data-pp-items]{display:grid!important;grid-auto-flow:column!important;grid-template-rows:repeat(3,auto)!important;grid-auto-columns:280px!important;align-content:start}
+[data-nda-body]{padding:60px 22px 26px!important}
+[data-nda-ctas]{flex-direction:column!important;width:100%!important}
+[data-nda-ctas]>*{width:100%!important;justify-content:center!important}
+[data-ltr-root]{padding:76px 12px 20px!important}
+.ltr-close{top:16px!important;right:16px!important;width:44px!important;height:44px!important}
+.ltr-scroll{padding:40px 24px 84px!important;max-height:calc(100vh - 100px)!important}
+.ltr-para{text-align:left!important;-webkit-hyphens:manual!important;hyphens:manual!important}
+[data-btd-grid]{grid-template-columns:1fr!important}
+[data-btd-title]{border-bottom:0!important;padding:24px 0 10px!important;gap:14px!important}
+[data-btd-body]{padding:0 0 24px!important}
+[data-rs-tilt]{transform:rotateZ(2deg)!important;box-shadow:0 0 28px rgba(246,124,41,0.35),0 24px 48px rgba(0,0,0,0.5)!important}
+}</style>
+<script src="opt/mail-picker.js" defer></script>
+<style>@media (max-width:640px){[data-nav-id]{display:flex!important}}</style>
+<style data-overscroll-fix="1">html,body{background:#171717;overscroll-behavior-y:none}</style>
+</helmet>
+<template id="__bundler_thumbnail">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+    <rect width="200" height="200" fill="#171717"></rect>
+    <text x="100" y="112" font-family="sans-serif" font-size="64" font-weight="700" fill="#F67C29" text-anchor="middle">S</text>
+  </svg>
+</template>
+<div style="position:relative;background:#171717;color:#E0DFBF;font-family:Inter,ui-sans-serif,sans-serif">
+
+  <div id="page-loader-bar" style="position:fixed;top:0;left:0;height:3px;width:0;background:#F67C29;z-index:9999;transition:width 0.4s ease;pointer-events:none"></div>
+
+  <div style="position:fixed;top:16px;left:0;right:0;z-index:50;display:flex;flex-direction:column;align-items:center;padding:0 16px">
+    <nav data-nav-pill="1" style="width:fit-content;display:flex;align-items:center;gap:28px;row-gap:8px;flex-wrap:wrap;border-radius:100px;border:1px solid rgba(224,223,191,0.18);backdrop-filter:blur(14px);transition:all 0.35s ease;padding:{{ navPillStyle.padding }};box-shadow:{{ navPillStyle.boxShadow }};background:{{ navPillStyle.background }}">
+      <a href="#top" style="display:flex;align-items:center;gap:10px;text-decoration:none">
+        <img src="opt/web/logo.webp" alt="Surya" width="32" height="32" decoding="async" style="width:32px;height:32px;border-radius:50%;display:block"><span data-nav-id="1" style="display:none;flex-direction:column;line-height:1.15;min-width:0"><span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:15px;color:#F5F4E8;white-space:nowrap">Surya D</span><span style="font-family:Inter;font-weight:500;font-size:11.5px;color:#A8A8A8;white-space:nowrap">Lead Product Designer</span></span>
+      </a>
+      <div data-nav-links="1" style="display:flex;align-items:center;gap:clamp(14px,3vw,24px);flex-wrap:wrap;padding-right:4px">
+        <a href="#work" style="font-family:Inter;font-weight:500;font-size:14px;color:#E0DFBF;text-decoration:none" style-hover="color:#F67C29">Work</a>
+        <a href="About.dc.html" style="font-family:Inter;font-weight:500;font-size:14px;color:#E0DFBF;text-decoration:none" style-hover="color:#F67C29">About me</a>
+        <a href="Resume.dc.html" style="font-family:Inter;font-weight:500;font-size:14px;color:#E0DFBF;text-decoration:none" style-hover="color:#F67C29">Contact</a>
+        <a href="opt/SuryaD_LeadProductDesigner_Resume.pdf" download="SuryaD_LeadProductDesigner_Resume.pdf" style="display:inline-flex;align-items:center;gap:6px;background:#F67C29;color:#171717;font-family:Inter;font-weight:600;font-size:13px;letter-spacing:0.02em;padding:9px 18px;border-radius:100px;text-decoration:none;white-space:nowrap" style-hover="background:#FFA35C;transform:translateY(-2px);box-shadow:0 10px 26px rgba(246,124,41,0.35)">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#171717" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"></path><path d="M6 11l6 6 6-6"></path><path d="M5 21h14"></path></svg>
+          Resume
+        </a>
+      </div>
+      <button data-nav-burger="1" type="button" onClick="{{ toggleNav }}" aria-label="Toggle menu" style="display:none;align-items:center;justify-content:center;width:40px;height:40px;flex-shrink:0;border-radius:50%;border:1px solid rgba(224,223,191,0.25);background:transparent;color:#E0DFBF;cursor:pointer;padding:0">
+        <sc-if value="{{ navOpen }}" hint-placeholder-val="{{ false }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12"></path><path d="M18 6L6 18"></path></svg></sc-if>
+        <sc-if value="{{ navClosed }}" hint-placeholder-val="{{ true }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16"></path><path d="M4 12h16"></path><path d="M4 17h16"></path></svg></sc-if>
+      </button>
+    </nav>
+    <sc-if value="{{ navOpen }}" hint-placeholder-val="{{ false }}">
+      <div data-nav-menu="1" style="margin-top:8px;width:100%;box-sizing:border-box;border-radius:24px;border:1px solid rgba(224,223,191,0.18);background:rgba(23,23,23,0.96);backdrop-filter:blur(14px);padding:10px;display:flex;flex-direction:column;gap:2px;box-shadow:0 20px 50px rgba(0,0,0,0.5)">
+        <a href="#work" onClick="{{ closeNav }}" style="display:block;font-family:Inter;font-weight:500;font-size:16px;color:#E0DFBF;text-decoration:none;padding:14px 16px;border-radius:14px" style-hover="background:rgba(224,223,191,0.06)">Work</a>
+        <a href="About.dc.html" onClick="{{ closeNav }}" style="display:block;font-family:Inter;font-weight:500;font-size:16px;color:#E0DFBF;text-decoration:none;padding:14px 16px;border-radius:14px" style-hover="background:rgba(224,223,191,0.06)">About me</a>
+        <a href="Resume.dc.html" onClick="{{ closeNav }}" style="display:block;font-family:Inter;font-weight:500;font-size:16px;color:#E0DFBF;text-decoration:none;padding:14px 16px;border-radius:14px" style-hover="background:rgba(224,223,191,0.06)">Contact</a>
+        <a href="opt/SuryaD_LeadProductDesigner_Resume.pdf" download="SuryaD_LeadProductDesigner_Resume.pdf" onClick="{{ closeNav }}" style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:8px;background:#F67C29;color:#171717;font-family:Inter;font-weight:600;font-size:15px;padding:14px 18px;border-radius:100px;text-decoration:none"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#171717" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"></path><path d="M6 11l6 6 6-6"></path><path d="M5 21h14"></path></svg>Resume</a>
+      </div>
+    </sc-if>
+  </div>
+
+  <section id="top" style="max-width:100%;margin:0 auto;padding:0;display:flex;align-items:center;position:relative;background:#120A06;overflow:hidden;min-height:clamp(640px,100vh,960px)">
+  <img src="opt/web/pasted-1790698455834-0.webp" alt="" aria-hidden="true" decoding="async" fetchpriority="high" class="home-hero-img" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:70% 30%;transform:translateX(8%);z-index:0;pointer-events:none">
+  <div aria-hidden="true" class="home-hero-shade" style="position:absolute;inset:0;z-index:0;pointer-events:none;background:linear-gradient(90deg, #120A06 0px, rgba(18,10,6,0.94) max(22%, 360px), rgba(18,10,6,0.72) max(38%, 640px), rgba(18,10,6,0.25) max(52%, 780px), rgba(18,10,6,0) max(64%, 900px))"></div>
+  <div aria-hidden="true" style="position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(60% 50% at 0% 0%, rgba(246,124,41,0.16) 0%, rgba(246,124,41,0) 70%)"></div>
+  <div aria-hidden="true" style="position:absolute;left:0;right:0;bottom:0;height:160px;z-index:0;pointer-events:none;background:linear-gradient(180deg, rgba(42,22,8,0) 0%, rgba(42,22,8,0.6) 55%, #2A1608 100%)"></div>
+  <div style="max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;width:100%;position:relative;z-index:1">
+    <div class="home-hero-copy" style="flex:0 1 600px;min-width:0;padding:calc(clamp(40px,6vw,72px) + 90px) 0 120px;align-self:center;margin-left:clamp(24px,6vw,72px)">
+      <div class="reveal" style="font-family:Inter;font-weight:500;font-size:16px;color:#9A9A9A;margin-bottom:16px">Hey, I'm Surya</div>
+      <h1 class="reveal" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(2.6rem,5.6vw,4.5rem);line-height:1.04;color:#E0DFBF;margin:0 0 18px">Lead Product<br>Designer.</h1>
+      <div class="reveal" style="height:34px;overflow:hidden;margin-bottom:22px">
+        <span id="tagline-rotator" style="display:inline-block;font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:20px;color:#F67C29;transition:opacity 400ms ease,transform 400ms ease;opacity:1;transform:translateY(0)">0→1 Product Design.</span>
+      </div>
+      <div class="reveal" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:20px">
+        <span style="font-family:Inter;font-size:15px;color:#9A9A9A">Built HealthTech &amp; PropTech as a Founding Member</span>
+      </div>
+      <div class="reveal" style="font-family:Inter;font-size:13px;letter-spacing:0.2em;text-transform:uppercase;color:#7A7A7A;margin-bottom:28px">Based in Coimbatore, Tamil Nadu</div>
+      <p class="reveal" style="font-family:Inter;font-size:clamp(1rem,1.35vw,1.15rem);line-height:1.65;color:#C9C9B8;max-width:520px;margin:0 0 40px">I'm a Product Designer with 5+ years of experience turning real-world problems into products that work. For people and for business. From research and strategy to design and launch, I work end-to-end, partnering closely with users, teams, and business stakeholders to bring meaningful products to life.</p>
+      <div class="reveal" style="display:flex;gap:16px;flex-wrap:wrap">
+        <a href="opt/SuryaD_LeadProductDesigner_Resume.pdf" download="SuryaD_LeadProductDesigner_Resume.pdf" style="display:inline-flex;align-items:center;gap:8px;background:#F67C29;color:#171717;font-family:Inter;font-weight:600;font-size:15px;letter-spacing:0.02em;padding:16px 28px;border-radius:100px;text-decoration:none" style-hover="background:#FFA35C;transform:translateY(-2px);box-shadow:0 10px 26px rgba(246,124,41,0.35)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#171717" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"></path><path d="M6 11l6 6 6-6"></path><path d="M5 21h14"></path></svg>
+          Download Resume
+        </a>
+        <a href="Resume.dc.html" style="display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(224,223,191,0.3);color:#E0DFBF;font-family:Inter;font-weight:600;font-size:15px;padding:16px 28px;border-radius:100px;text-decoration:none" style-hover="border-color:#E0DFBF;transform:translateY(-2px)">Say Hello 👋</a>
+      </div>
+    </div>
+  </div>
+  </section>
+
+  <section style="background:#2A1608;background-image:repeating-linear-gradient(90deg, rgba(246,124,41,0.16) 0 1px, transparent 1px 64px), repeating-linear-gradient(0deg, rgba(246,124,41,0.16) 0 1px, transparent 1px 64px);padding:clamp(64px,8vw,96px) 0">
+    <div style="max-width:1200px;margin:0 auto;padding:0 clamp(24px,6vw,72px)">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:36px">
+        <span style="font-family:Inter;font-weight:500;font-size:13px;letter-spacing:0.3em;text-transform:uppercase;color:#F67C29">Impact</span>
+        <span style="color:#FFFFFF;font-size:16px">✦</span>
+      </div>
+      <p class="reveal" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:clamp(1.6rem,3.2vw,2.6rem);line-height:1.4;color:#FFFFFF;max-width:1200px;margin:0">
+        <span style="color:#F67C29">5+ years</span> shaping digital products across HealthTech and PropTech — building HealthSy today, after taking PropReturns from idea to launch.
+      </p>
+    </div>
+  </section>
+
+  <section style="max-width:1200px;margin:0 auto;padding:clamp(64px,8vw,96px) clamp(24px,6vw,72px)">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+      <span style="font-family:Inter;font-weight:500;font-size:13px;letter-spacing:0.3em;text-transform:uppercase;color:#A8A8A8">Experience</span>
+      <span style="color:#E0DFBF;font-size:16px">✦</span>
+    </div>
+    <p class="reveal" style="font-family:Inter;font-size:15px;color:#9A9A9A;max-width:640px;margin:0 0 44px">From PropTech to HealthTech — built from scratch, launched with purpose, and still building.</p>
+    <div style="display:flex;flex-direction:column;border-top:1px solid rgba(224,223,191,0.12)">
+      <div class="reveal-fade" style="display:flex;gap:28px;padding:36px 0;border-bottom:1px solid rgba(224,223,191,0.12);flex-wrap:wrap">
+        <image-slot id="logo-healthsy" shape="rounded" radius="12" placeholder="Logo" style="width:56px;height:56px;flex-shrink:0"></image-slot>
+        <div style="flex:1 1 260px;min-width:0">
+          <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:clamp(1.25rem,2vw,1.5rem);color:#E0DFBF">Lead Product Designer</div>
+          <div style="font-family:Inter;font-size:14px;color:#9A9A9A;margin-top:4px">HealthSy — Coimbatore, Tamil Nadu, India</div>
+        </div>
+        <div style="font-family:Inter;font-size:13px;color:#7A7A7A;white-space:nowrap">Aug '24 – Present</div>
+        <ul style="flex-basis:100%;margin:16px 0 0;padding-left:20px;font-family:Inter;font-size:15px;color:#C9C9B8;line-height:1.7">
+          <li>Leading product design from start to finish, deciding what to build next and keeping everyone aligned.</li>
+          <li>Building and leading the design team, from hiring to mentoring.</li>
+          <li>Designed the pharmacy software, central team tools and CRM used by internal teams every day.</li>
+          <li>Launched the pharmacy website, in-store kiosk app, store admin panel and WhatsApp support system.</li>
+          <li>Looking after the design system and brand across our products, landing pages and campaigns.</li>
+        </ul>
+      </div>
+      <div class="reveal-fade" style="display:flex;gap:28px;padding:36px 0;border-bottom:1px solid rgba(224,223,191,0.12);flex-wrap:wrap">
+        <image-slot id="logo-healthsy-2" shape="rounded" radius="12" placeholder="Logo" style="width:56px;height:56px;flex-shrink:0"></image-slot>
+        <div style="flex:1 1 260px;min-width:0">
+          <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:clamp(1.25rem,2vw,1.5rem);color:#E0DFBF">Senior Product Designer</div>
+          <div style="font-family:Inter;font-size:14px;color:#9A9A9A;margin-top:4px">HealthSy — Coimbatore, Tamil Nadu, India</div>
+        </div>
+        <div style="font-family:Inter;font-size:13px;color:#7A7A7A;white-space:nowrap">Mar '23 – Aug '24</div>
+        <ul style="flex-basis:100%;margin:16px 0 0;padding-left:20px;font-family:Inter;font-size:15px;color:#C9C9B8;line-height:1.7">
+          <li>Took HealthSy from zero to one: worked with the founders on business requirements, product goals and research.</li>
+          <li>Built the HealthSy design system and website from concept to launch.</li>
+          <li>Designed the User, Pharmacy, Doctor and Delivery apps, plus admin panels for internal teams.</li>
+          <li>Launched the Prescription Writer, InstaDoc consultations and HHSP home healthcare service.</li>
+          <li>Validated releases through customer feedback, testing and close handoff with developers and QA.</li>
+        </ul>
+      </div>
+      <div class="reveal-fade" style="display:flex;gap:28px;padding:36px 0;border-bottom:1px solid rgba(224,223,191,0.12);flex-wrap:wrap">
+        <image-slot id="logo-propreturns" shape="rounded" radius="12" placeholder="Logo" style="width:56px;height:56px;flex-shrink:0"></image-slot>
+        <div style="flex:1 1 260px;min-width:0">
+          <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:clamp(1.25rem,2vw,1.5rem);color:#E0DFBF">UI/UX Designer</div>
+          <div style="font-family:Inter;font-size:14px;color:#9A9A9A;margin-top:4px">PropReturns (YC S21) — Mumbai, Maharashtra, India</div>
+        </div>
+        <div style="font-family:Inter;font-size:13px;color:#7A7A7A;white-space:nowrap">Oct '21 – Mar '23</div>
+        <ul style="flex-basis:100%;margin:16px 0 0;padding-left:20px;font-family:Inter;font-size:15px;color:#C9C9B8;line-height:1.7">
+          <li>Designed and built PropReturns' real-estate ecommerce platform from scratch to launch.</li>
+          <li>Created the PropReturns design system, company website and admin panels for operations.</li>
+          <li>Designed the ecommerce platform for REIT products.</li>
+          <li>Led user research and feature planning with the founders, then iterated on user feedback.</li>
+          <li>Shaped the brand identity, brochures and social media creatives.</li>
+          <li>Facilitated transactions worth 100 crore through the platform.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="work" style="max-width:1200px;margin:0 auto;padding:clamp(64px,8vw,96px) clamp(24px,6vw,72px)">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:40px">
+      <span style="font-family:Inter;font-weight:500;font-size:13px;letter-spacing:0.3em;text-transform:uppercase;color:#A8A8A8">Select Work</span>
+      <span style="color:#E0DFBF;font-size:16px">✦</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:0">
+<div class="reveal-fade" data-work-card="1" style="position:sticky;top:100px;z-index:1;border-radius:28px;overflow:hidden;min-height:520px;display:flex;align-items:flex-end;box-shadow:0 30px 60px rgba(0,0,0,0.45);margin-bottom:40px">
+        <image-slot id="project-1-cover" shape="rect" data-work-img="1" placeholder="Upload background image" src="opt/web/project-cover-placeholder.webp" style="position:absolute;inset:0;width:100%;height:100%;z-index:0"></image-slot>
+        <div data-work-shade="1" style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.55) 55%, rgba(0,0,0,0.82) 100%);z-index:1;pointer-events:none"></div>
+        <span style="position:absolute;top:28px;left:28px;z-index:2;display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,0.14);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.25);color:#FFFFFF;font-family:Inter;font-weight:600;font-size:13px;pointer-events:none">01</span>
+        <div data-work-body="1" style="position:relative;z-index:2;padding:32px;width:100%">
+          <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(1.6rem,3vw,2.4rem);line-height:1.15;color:#FFFFFF;margin:0 0 20px;max-width:640px">Delivery Partner App</h3>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px">
+            <span style="font-family:Inter;font-size:13px;color:#FFFFFF;background:rgba(255,255,255,0.14);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.25);border-radius:100px;padding:7px 16px">Delivery &amp; Logistics</span>
+            <span style="font-family:Inter;font-size:13px;color:#FFFFFF;background:rgba(255,255,255,0.14);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.25);border-radius:100px;padding:7px 16px">iOS &amp; Android</span>
+          </div>
+          <p style="font-family:Inter;font-size:15px;line-height:1.6;color:rgba(255,255,255,0.85);max-width:560px;margin:0 0 24px">Helping delivery partners pick up, track and complete medicine orders faster.</p>
+          <a href="Delivery Partner App.dc.html" style="display:inline-flex;align-items:center;gap:8px;font-family:Inter;font-weight:600;font-size:14px;color:#FFFFFF;background:rgba(255,255,255,0.12);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.25);border-radius:100px;padding:9px 18px;text-decoration:none;transition:background .3s ease,border-color .3s ease,transform .3s ease" style-hover="background:#F67C29;border-color:#F67C29;transform:translateY(-2px)">
+            View Case Study
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .3s ease" style-hover="transform:translateX(4px)"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg>
+          </a>
+        </div>
+      </div>
+<div class="reveal-fade" data-work-card="1" style="position:sticky;top:132px;z-index:2;border-radius:28px;overflow:hidden;min-height:520px;display:flex;align-items:flex-end;box-shadow:0 30px 60px rgba(0,0,0,0.45);margin-bottom:40px">
+        <image-slot id="project-2-cover" shape="rect" data-work-img="1" placeholder="Upload background image" src="opt/web/project-cover-placeholder.webp" style="position:absolute;inset:0;width:100%;height:100%;z-index:0"></image-slot>
+        <div data-work-shade="1" style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.55) 55%, rgba(0,0,0,0.82) 100%);z-index:1;pointer-events:none"></div>
+        <span style="position:absolute;top:28px;left:28px;z-index:2;display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,0.14);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.25);color:#FFFFFF;font-family:Inter;font-weight:600;font-size:13px;pointer-events:none">02</span>
+        <div data-work-body="1" style="position:relative;z-index:2;padding:32px;width:100%">
+          <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(1.6rem,3vw,2.4rem);line-height:1.15;color:#FFFFFF;margin:0 0 20px;max-width:640px">User App</h3>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px">
+            <span style="font-family:Inter;font-size:13px;color:#FFFFFF;background:rgba(255,255,255,0.14);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.25);border-radius:100px;padding:7px 16px">Healthcare</span>
+            <span style="font-family:Inter;font-size:13px;color:#FFFFFF;background:rgba(255,255,255,0.14);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.25);border-radius:100px;padding:7px 16px">iOS &amp; Android</span>
+          </div>
+          <p style="font-family:Inter;font-size:15px;line-height:1.6;color:rgba(255,255,255,0.85);max-width:560px;margin:0 0 24px">One app for ordering medicines and accessing healthcare services.</p>
+          <a href="HealthSy User App.dc.html" style="text-decoration:none;display:inline-flex;align-items:center;gap:8px;font-family:Inter;font-weight:600;font-size:14px;color:#FFFFFF;background:rgba(255,255,255,0.12);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.25);border-radius:100px;padding:9px 18px;transition:background .3s ease,border-color .3s ease,transform .3s ease" style-hover="background:#F67C29;border-color:#F67C29;transform:translateY(-2px)">
+            View Case Study
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .3s ease" style-hover="transform:translateX(4px)"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg>
+          </a>
+        </div>
+      </div>
+<div class="reveal-fade" data-work-card="1" style="position:sticky;top:164px;z-index:3;border-radius:28px;overflow:hidden;min-height:520px;display:flex;align-items:flex-end;box-shadow:0 30px 60px rgba(0,0,0,0.45);margin-bottom:40px">
+        <image-slot id="project-3-cover" shape="rect" data-work-img="1" placeholder="Upload background image" src="opt/web/project-cover-placeholder.webp" style="position:absolute;inset:0;width:100%;height:100%;z-index:0"></image-slot>
+        <div data-work-shade="1" style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.55) 55%, rgba(0,0,0,0.82) 100%);z-index:1;pointer-events:none"></div>
+        <span style="position:absolute;top:28px;left:28px;z-index:2;display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,0.14);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.25);color:#FFFFFF;font-family:Inter;font-weight:600;font-size:13px;pointer-events:none">03</span>
+        <div data-work-body="1" style="position:relative;z-index:2;padding:32px;width:100%">
+          <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(1.6rem,3vw,2.4rem);line-height:1.15;color:#FFFFFF;margin:0 0 20px;max-width:640px">Pharmacy website</h3>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px">
+            <span style="font-family:Inter;font-size:13px;color:#FFFFFF;background:rgba(255,255,255,0.14);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.25);border-radius:100px;padding:7px 16px">Pharmacy Retail</span>
+            <span style="font-family:Inter;font-size:13px;color:#FFFFFF;background:rgba(255,255,255,0.14);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.25);border-radius:100px;padding:7px 16px">Responsive Web</span>
+          </div>
+          <p style="font-family:Inter;font-size:15px;line-height:1.6;color:rgba(255,255,255,0.85);max-width:560px;margin:0 0 24px">Building a digital storefront for a growing network of physical pharmacies.</p>
+          <a href="HealthSy Pharmacy Website.dc.html" style="text-decoration:none;display:inline-flex;align-items:center;gap:8px;font-family:Inter;font-weight:600;font-size:14px;color:#FFFFFF;background:rgba(255,255,255,0.12);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.25);border-radius:100px;padding:9px 18px;transition:background .3s ease,border-color .3s ease,transform .3s ease" style-hover="background:#F67C29;border-color:#F67C29;transform:translateY(-2px)">
+            View Case Study
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .3s ease" style-hover="transform:translateX(4px)"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg>
+          </a>
+        </div>
+      </div>
+<div class="reveal-fade" data-work-card="1" style="position:sticky;top:196px;z-index:4;border-radius:28px;overflow:hidden;min-height:520px;display:flex;align-items:flex-end;box-shadow:0 30px 60px rgba(0,0,0,0.45);margin-bottom:40px">
+        <image-slot id="project-6-cover" shape="rect" data-work-img="1" placeholder="Upload background image" src="opt/web/project-cover-placeholder.webp" style="position:absolute;inset:0;width:100%;height:100%;z-index:0"></image-slot>
+        <div data-work-shade="1" style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.55) 55%, rgba(0,0,0,0.82) 100%);z-index:1;pointer-events:none"></div>
+        <span style="position:absolute;top:28px;left:28px;z-index:2;display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,0.14);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.25);color:#FFFFFF;font-family:Inter;font-weight:600;font-size:13px;pointer-events:none">04</span>
+        <div data-work-body="1" style="position:relative;z-index:2;padding:32px;width:100%">
+          <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(1.6rem,3vw,2.4rem);line-height:1.15;color:#FFFFFF;margin:0 0 20px;max-width:640px">CRM Panel</h3>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px">
+            <span style="font-family:Inter;font-size:13px;color:#FFFFFF;background:rgba(255,255,255,0.14);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.25);border-radius:100px;padding:7px 16px">Enterprise</span>
+            <span style="font-family:Inter;font-size:13px;color:#FFFFFF;background:rgba(255,255,255,0.14);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.25);border-radius:100px;padding:7px 16px">Web Application</span>
+          </div>
+          <p style="font-family:Inter;font-size:15px;line-height:1.6;color:rgba(255,255,255,0.85);max-width:560px;margin:0 0 24px">Designing a multi-team healthcare CRM from scratch.</p>
+          <a href="CRM Panel.dc.html" style="text-decoration:none;display:inline-flex;align-items:center;gap:8px;font-family:Inter;font-weight:600;font-size:14px;color:#FFFFFF;background:rgba(255,255,255,0.12);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.25);border-radius:100px;padding:9px 18px;transition:background .3s ease,border-color .3s ease,transform .3s ease" style-hover="background:#F67C29;border-color:#F67C29;transform:translateY(-2px)">
+            View Case Study
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .3s ease" style-hover="transform:translateX(4px)"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg>
+          </a>
+        </div>
+      </div>
+<div class="reveal-fade" data-work-card="1" style="position:sticky;top:228px;z-index:5;border-radius:28px;overflow:hidden;min-height:520px;display:flex;align-items:flex-end;box-shadow:0 30px 60px rgba(0,0,0,0.45)">
+        <image-slot id="project-7-cover" shape="rect" data-work-img="1" placeholder="Upload background image" src="opt/web/project-cover-placeholder.webp" style="position:absolute;inset:0;width:100%;height:100%;z-index:0"></image-slot>
+        <div data-work-shade="1" style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.55) 55%, rgba(0,0,0,0.82) 100%);z-index:1;pointer-events:none"></div>
+        <span style="position:absolute;top:28px;left:28px;z-index:2;display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,0.14);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.25);color:#FFFFFF;font-family:Inter;font-weight:600;font-size:13px;pointer-events:none">05</span>
+        <div data-work-body="1" style="position:relative;z-index:2;padding:32px;width:100%">
+          <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(1.6rem,3vw,2.4rem);line-height:1.15;color:#FFFFFF;margin:0 0 20px;max-width:640px">Software Panel</h3>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px">
+            <span style="font-family:Inter;font-size:13px;color:#FFFFFF;background:rgba(255,255,255,0.14);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.25);border-radius:100px;padding:7px 16px">Pharmacy Operations</span>
+            <span style="font-family:Inter;font-size:13px;color:#FFFFFF;background:rgba(255,255,255,0.14);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.25);border-radius:100px;padding:7px 16px">Enterprise Web</span>
+          </div>
+          <p style="font-family:Inter;font-size:15px;line-height:1.6;color:rgba(255,255,255,0.85);max-width:560px;margin:0 0 24px">Designing a multi-scale pharmacy operations platform.</p>
+          <a href="Software Panel.dc.html" style="text-decoration:none;display:inline-flex;align-items:center;gap:8px;font-family:Inter;font-weight:600;font-size:14px;color:#FFFFFF;background:rgba(255,255,255,0.12);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.25);border-radius:100px;padding:9px 18px;transition:background .3s ease,border-color .3s ease,transform .3s ease" style-hover="background:#F67C29;border-color:#F67C29;transform:translateY(-2px)">
+            View Case Study
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .3s ease" style-hover="transform:translateX(4px)"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="products-process" style="overflow-x:clip;max-width:1200px;margin:0 auto;padding:clamp(64px,8vw,96px) clamp(24px,6vw,72px)">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+      <span style="font-family:Inter;font-weight:500;font-size:13px;letter-spacing:0.3em;text-transform:uppercase;color:#A8A8A8">Products &amp; Process</span>
+      <span style="color:#E0DFBF;font-size:16px">✦</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px 40px;flex-wrap:wrap;margin-bottom:44px">
+      <div style="flex:1 1 420px;min-width:0">
+        <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(2rem,4.4vw,3.4rem);line-height:1.08;color:#E0DFBF;margin:0 0 14px">{{ ppTitle }}</h2>
+        <p style="font-family:Inter;font-size:15px;line-height:1.6;color:#9A9A9A;max-width:640px;margin:0;text-wrap:pretty">{{ ppDesc }}</p>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
+        <div aria-hidden="true" style="display:flex;align-items:flex-start;gap:2px;margin-top:-24px">
+          <span style="font-family:Caveat,cursive;font-weight:600;font-size:22px;color:#F67C29;transform:rotate(-6deg);white-space:nowrap">try this</span>
+          <svg width="40" height="30" viewBox="0 0 46 34" fill="none" stroke="#F67C29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-top:8px"><path d="M2 6c14-4 30-2 38 20"></path><path d="M32 22l8 5 3-9"></path></svg>
+        </div>
+        <div role="tablist" aria-label="Products or process" style="display:flex;gap:4px;padding:5px;border-radius:100px;background:rgba(224,223,191,0.06);border:1px solid rgba(224,223,191,0.15)">
+          <button role="tab" aria-selected="{{ ppIsProducts }}" onClick="{{ ppShowProducts }}" style="{{ ppTabProductsStyle }}">Products</button>
+          <button role="tab" aria-selected="{{ ppIsProcess }}" onClick="{{ ppShowProcess }}" style="{{ ppTabProcessStyle }}">Process</button>
+        </div>
+      </div>
+    </div>
+
+    <sc-if value="{{ ppIsProducts }}" hint-placeholder-val="{{ true }}">
+      <div class="pp-scroll" data-pp-auto="1" style="overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 40px,#000 calc(100% - 80px),transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 40px,#000 calc(100% - 80px),transparent 100%);padding:0 80px 8px 40px;margin:0 -80px 0 -40px;animation:pp-in .5s ease both">
+      <div data-pp-grid="1" style="display:grid;grid-auto-flow:column;grid-auto-columns:300px;gap:20px;width:max-content;align-items:start">
+        <sc-for list="{{ ppYears }}" as="yr" hint-placeholder-count="6">
+          <div style="display:flex;flex-direction:column;gap:12px;min-width:0">
+            <div style="display:flex;align-items:center;gap:12px;padding-bottom:12px;border-bottom:1px solid rgba(224,223,191,0.12)">
+              <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:20px;color:#E0DFBF">{{ yr.year }}</span>
+              <span style="font-family:Inter;font-size:12px;color:#7A7A7A">{{ yr.count }}</span>
+            </div>
+            <div data-pp-items="1" style="display:flex;flex-direction:column;gap:12px">
+            <sc-for list="{{ yr.items }}" as="p" hint-placeholder-count="3">
+              <a href="{{ p.href }}" title="{{ p.linkTitle }}" style="{{ p.cardStyle }}" style-hover="{{ p.cardHover }}">
+                <span style="flex-shrink:0;width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:Inter;font-weight:600;font-size:13px;color:#F67C29;background:rgba(246,124,41,0.1);border:1px solid rgba(246,124,41,0.22)">{{ p.num }}</span>
+                <span style="display:flex;flex-direction:column;gap:4px;min-width:0;flex:1">
+                  <span style="font-family:Inter;font-weight:600;font-size:15px;line-height:1.3;color:#E0DFBF">{{ p.title }}</span>
+                  <span style="font-family:Inter;font-size:13px;line-height:1.5;color:#9A9A9A">{{ p.desc }}</span>
+                </span>
+                <sc-if value="{{ p.href }}" hint-placeholder-val="{{ false }}">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F67C29" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:2px"><path d="M7 17L17 7"></path><path d="M8 7h9v9"></path></svg>
+                </sc-if>
+              </a>
+            </sc-for>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ ppIsProcess }}" hint-placeholder-val="{{ false }}">
+      <div class="pp-scroll" data-pp-auto="1" style="overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 40px,#000 calc(100% - 80px),transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 40px,#000 calc(100% - 80px),transparent 100%);padding:0 80px 8px 40px;margin:0 -80px 0 -40px;animation:pp-in .5s ease both">
+      <div style="display:flex;gap:20px;width:max-content;align-items:stretch">
+        <sc-for list="{{ ppGroups }}" as="g" hint-placeholder-count="2">
+          <div style="border-radius:20px;border:1px solid rgba(224,223,191,0.15);background:{{ g.bg }};padding:clamp(20px,3vw,32px)">
+            <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:24px">
+              <span style="width:10px;height:10px;border-radius:2px;background:{{ g.color }};transform:rotate(45deg)"></span>
+              <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(1.25rem,2vw,1.5rem);color:#E0DFBF">{{ g.brand }}</span>
+              <span style="font-family:Inter;font-size:13px;color:#9A9A9A">{{ g.span }}</span>
+            </div>
+            <div style="display:grid;grid-auto-flow:column;grid-auto-columns:290px;gap:20px;align-items:start">
+              <sc-for list="{{ g.columns }}" as="c" hint-placeholder-count="2">
+                <div style="display:flex;flex-direction:column;gap:12px;min-width:0">
+                  <div style="display:flex;flex-direction:column;gap:6px;padding-bottom:12px;border-bottom:1px solid rgba(224,223,191,0.12)">
+                    <span style="display:flex;align-items:center;gap:10px;font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:18px;color:#E0DFBF"><span style="width:8px;height:8px;border-radius:50%;background:{{ g.color }}"></span>{{ c.year }}</span>
+                    <span style="font-family:Inter;font-size:13px;color:#9A9A9A">{{ c.tagline }}</span>
+                  </div>
+                  <sc-for list="{{ c.steps }}" as="s" hint-placeholder-count="3">
+                    <div style="display:flex;gap:14px;align-items:flex-start;padding:16px;border-radius:16px;background:rgba(224,223,191,0.03);border:1px solid rgba(224,223,191,0.1)">
+                      <span style="flex-shrink:0;width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:{{ g.iconBg }};border:1px solid {{ g.iconLine }}">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{ g.color }}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="{{ s.icon }}"></path></svg>
+                      </span>
+                      <span style="display:flex;flex-direction:column;gap:3px;min-width:0">
+                        <span style="font-family:Inter;font-weight:600;font-size:11px;letter-spacing:0.1em;color:#7A7A7A">{{ s.num }}</span>
+                        <span style="font-family:Inter;font-weight:600;font-size:15px;line-height:1.3;color:#E0DFBF">{{ s.title }}</span>
+                        <span style="font-family:Inter;font-size:13px;line-height:1.5;color:#9A9A9A">{{ s.desc }}</span>
+                      </span>
+                    </div>
+                  </sc-for>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+      </div>
+    </sc-if>
+  </section>
+
+  <sc-if value="{{ showAwards }}" hint-placeholder-val="{{ true }}">
+  <section id="awards" style="max-width:1200px;margin:0 auto;padding:clamp(64px,8vw,96px) clamp(24px,6vw,72px)">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:40px">
+      <span style="font-family:Inter;font-weight:500;font-size:13px;letter-spacing:0.3em;text-transform:uppercase;color:#A8A8A8">Awards &amp; Recognition</span>
+      <span style="color:#F67C29;font-size:16px">✦</span>
+      <div style="margin-left:auto;display:flex;gap:10px">
+        <button type="button" onClick="{{ awardsScrollPrev }}" aria-label="Previous awards" style="width:40px;height:40px;border-radius:50%;border:1px solid rgba(224,223,191,0.2);background:transparent;color:#E0DFBF;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.25s ease" style-hover="background:#F67C29;border-color:#F67C29;color:#171717"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg></button>
+        <button type="button" onClick="{{ awardsScrollNext }}" aria-label="Next awards" style="width:40px;height:40px;border-radius:50%;border:1px solid rgba(224,223,191,0.2);background:transparent;color:#E0DFBF;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.25s ease" style-hover="background:#F67C29;border-color:#F67C29;color:#171717"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"></path></svg></button>
+      </div>
+    </div>
+    <div class="awards-track" ref="{{ awardsTrackRef }}" style="display:flex;gap:20px;overflow-x:auto;overflow-y:visible;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding:12px 0 16px;margin:-12px 0 0;-webkit-mask-image:linear-gradient(90deg,#000 0,#000 calc(100% - 120px),transparent 100%);mask-image:linear-gradient(90deg,#000 0,#000 calc(100% - 120px),transparent 100%)">
+      <div class="reveal-fade" style="flex:0 0 calc(42% - 12px);min-width:min(300px,82%);scroll-snap-align:start;box-sizing:border-box;border:1px solid rgba(224,223,191,0.15);border-radius:20px;padding:20px;background:rgba(224,223,191,0.02);display:flex;flex-direction:column;gap:16px;transition:transform 0.35s cubic-bezier(.16,.84,.44,1),box-shadow 0.35s ease,border-color 0.35s ease" style-hover="transform:translateY(-4px);box-shadow:0 16px 34px rgba(0,0,0,0.35);border-color:rgba(246,124,41,0.4)">
+        <image-slot id="award-cert-2" shape="rounded" radius="12" placeholder="Upload certificate image" style="width:100%;aspect-ratio:4/3;display:block"></image-slot>
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px">
+          <div>
+            <div style="font-family:Inter;font-weight:600;font-size:16px;color:#E0DFBF">Best Insider of the Month</div>
+            <div style="font-family:Inter;font-size:14px;color:#9A9A9A;line-height:1.5;margin-top:4px">HealthSy · November 2023. Awarded for overall contribution and performance.</div>
+          </div>
+          <a href="https://lnkd.in/p/dzSRUWqA" target="_blank" rel="noopener noreferrer" aria-label="View LinkedIn post" title="View LinkedIn post" style="flex-shrink:0;width:32px;height:32px;border-radius:8px;background:rgba(224,223,191,0.08);display:flex;align-items:center;justify-content:center;transition:background 0.25s ease" style-hover="background:rgba(246,124,41,0.18)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#E0DFBF"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.14 1.44-2.14 2.94v5.66H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM3.56 20.45h3.56V9H3.56v11.45z"></path></svg>
+          </a>
+        </div>
+      </div>
+      <div class="reveal-fade" style="flex:0 0 calc(42% - 12px);min-width:min(300px,82%);scroll-snap-align:start;box-sizing:border-box;border:1px solid rgba(224,223,191,0.15);border-radius:20px;padding:20px;background:rgba(224,223,191,0.02);display:flex;flex-direction:column;gap:16px;transition:transform 0.35s cubic-bezier(.16,.84,.44,1),box-shadow 0.35s ease,border-color 0.35s ease" style-hover="transform:translateY(-4px);box-shadow:0 16px 34px rgba(0,0,0,0.35);border-color:rgba(246,124,41,0.4)">
+        <image-slot id="award-cert-1" shape="rounded" radius="12" placeholder="Upload certificate image" style="width:100%;aspect-ratio:4/3;display:block"></image-slot>
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px">
+          <div>
+            <div style="font-family:Inter;font-weight:600;font-size:16px;color:#E0DFBF">Star Performer of the Month</div>
+            <div style="font-family:Inter;font-size:14px;color:#9A9A9A;line-height:1.5;margin-top:4px">HealthSy · August 2025. Awarded for overall contribution and performance.</div>
+          </div>
+          <a href="https://lnkd.in/p/dn7XrHwH" target="_blank" rel="noopener noreferrer" aria-label="View LinkedIn post" title="View LinkedIn post" style="flex-shrink:0;width:32px;height:32px;border-radius:8px;background:rgba(224,223,191,0.08);display:flex;align-items:center;justify-content:center;transition:background 0.25s ease" style-hover="background:rgba(246,124,41,0.18)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#E0DFBF"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.14 1.44-2.14 2.94v5.66H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM3.56 20.45h3.56V9H3.56v11.45z"></path></svg>
+          </a>
+        </div>
+      </div>
+      <div class="reveal-fade" style="flex:0 0 calc(42% - 12px);min-width:min(300px,82%);scroll-snap-align:start;box-sizing:border-box;border:1px solid rgba(224,223,191,0.15);border-radius:20px;padding:20px;background:rgba(224,223,191,0.02);display:flex;flex-direction:column;gap:16px;transition:transform 0.35s cubic-bezier(.16,.84,.44,1),box-shadow 0.35s ease,border-color 0.35s ease" style-hover="transform:translateY(-4px);box-shadow:0 16px 34px rgba(0,0,0,0.35);border-color:rgba(246,124,41,0.4)">
+        <image-slot id="award-cert-4" shape="rounded" radius="12" placeholder="Upload certificate image" style="width:100%;aspect-ratio:4/3;display:block"></image-slot>
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px">
+          <div>
+            <div style="font-family:Inter;font-weight:600;font-size:16px;color:#E0DFBF">Best Performer of the Month</div>
+            <div style="font-family:Inter;font-size:14px;color:#9A9A9A;line-height:1.5;margin-top:4px">HealthSy · October 2025. Awarded for overall contribution and performance.</div>
+          </div>
+          <a href="https://lnkd.in/p/dzSRUWqA" target="_blank" rel="noopener noreferrer" aria-label="View LinkedIn post" title="View LinkedIn post" style="flex-shrink:0;width:32px;height:32px;border-radius:8px;background:rgba(224,223,191,0.08);display:flex;align-items:center;justify-content:center;transition:background 0.25s ease" style-hover="background:rgba(246,124,41,0.18)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#E0DFBF"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.14 1.44-2.14 2.94v5.66H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM3.56 20.45h3.56V9H3.56v11.45z"></path></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  </sc-if>
+
+  <sc-if value="{{ showTestimonials }}" hint-placeholder-val="{{ true }}">
+  <section style="background:#2A1608;background-image:repeating-linear-gradient(90deg, rgba(246,124,41,0.16) 0 1px, transparent 1px 64px), repeating-linear-gradient(0deg, rgba(246,124,41,0.16) 0 1px, transparent 1px 64px);padding:clamp(64px,8vw,96px) 0">
+    <div style="max-width:1200px;margin:0 auto;padding:0 clamp(24px,6vw,72px)">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:40px">
+        <span style="font-family:Inter;font-weight:500;font-size:13px;letter-spacing:0.3em;text-transform:uppercase;color:#F67C29">What They Said</span>
+        <span style="color:#FFFFFF;font-size:16px">✦</span>
+      </div>
+    </div>
+    <div style="overflow:hidden;-webkit-mask-image:linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);mask-image:linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent)">
+      <div class="testimonial-track" style="display:flex;gap:28px;width:max-content;padding-right:28px">
+        <div data-tcard="1" style="width:380px;flex-shrink:0;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:32px">
+          <div style="font-family:Georgia,serif;font-size:44px;color:#F67C29;line-height:1;margin-bottom:12px">"</div>
+          <p style="font-family:'Bricolage Grotesque',sans-serif;font-weight:500;font-size:1.2rem;line-height:1.45;color:#FFFFFF;margin:0 0 24px;min-height:110px">Surya is a thoughtful designer who understands both users and developers. His clear communication, attention to detail, and practical approach make collaboration effortless.</p>
+          <div style="display:flex;align-items:center;gap:12px">
+            <img src="opt/slots/avatar-2-dup.webp" alt="Naveen Balaji" loading="lazy" decoding="async" style="width:44px;height:44px;flex-shrink:0;border-radius:50%;object-fit:cover;display:block">
+            <div style="font-family:Inter;font-size:14px;color:rgba(255,255,255,0.7)">Naveen Balaji<br><span style="font-size:12px;color:rgba(255,255,255,0.5)">Fullstack developer @Synechron</span></div>
+            <a href="https://www.linkedin.com/in/naveen-balaji-b987401b3/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile" title="View LinkedIn profile" style="margin-left:auto;flex-shrink:0;width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.75);transition:all 0.25s ease" style-hover="color:#FFFFFF;background:#F67C29;border-color:#F67C29"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"></path></svg></a>
+          </div>
+        </div>
+        <div data-tcard="1" style="width:380px;flex-shrink:0;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:32px">
+          <div style="font-family:Georgia,serif;font-size:44px;color:#F67C29;line-height:1;margin-bottom:12px">"</div>
+          <p style="font-family:'Bricolage Grotesque',sans-serif;font-weight:500;font-size:1.2rem;line-height:1.45;color:#FFFFFF;margin:0 0 24px;min-height:110px">If there’s a complicated screen, give it to Surya. He’ll simplify it, make it look good, and probably create 12 more Figma variations just to be sure! A genuinely talented and fun teammate to work with.</p>
+          <div style="display:flex;align-items:center;gap:12px">
+            <img src="opt/slots/avatar-3.webp" alt="Deva Dharshini" loading="lazy" decoding="async" style="width:44px;height:44px;flex-shrink:0;border-radius:50%;object-fit:cover;display:block">
+            <div style="font-family:Inter;font-size:14px;color:rgba(255,255,255,0.7)">Deva Dharshini<br><span style="font-size:12px;color:rgba(255,255,255,0.5)">Sr. Product Designer @TripFactory</span></div>
+            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile" title="View LinkedIn profile" style="margin-left:auto;flex-shrink:0;width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.75);transition:all 0.25s ease" style-hover="color:#FFFFFF;background:#F67C29;border-color:#F67C29"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"></path></svg></a>
+          </div>
+        </div>
+        <div data-tcard="1" style="width:380px;flex-shrink:0;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:32px">
+          <div style="font-family:Georgia,serif;font-size:44px;color:#F67C29;line-height:1;margin-bottom:12px">"</div>
+          <p style="font-family:'Bricolage Grotesque',sans-serif;font-weight:500;font-size:1.2rem;line-height:1.45;color:#FFFFFF;margin:0 0 24px;min-height:110px">Surya was great to work with. He understood our finance requirements quickly and delivered practical, user-friendly solutions with great attention to detail.</p>
+          <div style="display:flex;align-items:center;gap:12px">
+            <img src="opt/slots/avatar-1-dup.webp" alt="Naveen Kumar" loading="lazy" decoding="async" style="width:44px;height:44px;flex-shrink:0;border-radius:50%;object-fit:cover;display:block">
+            <div style="font-family:Inter;font-size:14px;color:rgba(255,255,255,0.7)">Naveen Kumar<br><span style="font-size:12px;color:rgba(255,255,255,0.5)">CA @EY</span></div>
+            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile" title="View LinkedIn profile" style="margin-left:auto;flex-shrink:0;width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.75);transition:all 0.25s ease" style-hover="color:#FFFFFF;background:#F67C29;border-color:#F67C29"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"></path></svg></a>
+          </div>
+        </div>
+        <div data-tcard="1" style="width:380px;flex-shrink:0;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:32px">
+          <div style="font-family:Georgia,serif;font-size:44px;color:#F67C29;line-height:1;margin-bottom:12px">"</div>
+          <p style="font-family:'Bricolage Grotesque',sans-serif;font-weight:500;font-size:1.2rem;line-height:1.45;color:#FFFFFF;margin:0 0 24px;min-height:110px">Working with Surya from the early days of PropReturns was an incredible experience. He wasn’t just a UI/UX designer, he became a key part of how we shaped the product.</p>
+          <div style="display:flex;align-items:center;gap:12px">
+            <img src="opt/slots/avatar-4.webp" alt="Jayant Panwar" loading="lazy" decoding="async" style="width:44px;height:44px;flex-shrink:0;border-radius:50%;object-fit:cover;display:block">
+            <div style="font-family:Inter;font-size:14px;color:rgba(255,255,255,0.7)">Jayant Panwar<br><span style="font-size:12px;color:rgba(255,255,255,0.5)">Co-Founder @Propreturns</span></div>
+            <a href="https://www.linkedin.com/in/jayant-panwar/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile" title="View LinkedIn profile" style="margin-left:auto;flex-shrink:0;width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.75);transition:all 0.25s ease" style-hover="color:#FFFFFF;background:#F67C29;border-color:#F67C29"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"></path></svg></a>
+          </div>
+        </div>
+        <div style="width:380px;flex-shrink:0;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:32px" aria-hidden="true">
+          <div style="font-family:Georgia,serif;font-size:44px;color:#F67C29;line-height:1;margin-bottom:12px">"</div>
+          <p style="font-family:'Bricolage Grotesque',sans-serif;font-weight:500;font-size:1.2rem;line-height:1.45;color:#FFFFFF;margin:0 0 24px;min-height:110px">Surya is a thoughtful designer who understands both users and developers. His clear communication, attention to detail, and practical approach make collaboration effortless.</p>
+          <div style="display:flex;align-items:center;gap:12px">
+            <img src="opt/slots/avatar-2-dup.webp" alt="Naveen Balaji" loading="lazy" decoding="async" style="width:44px;height:44px;flex-shrink:0;border-radius:50%;object-fit:cover;display:block">
+            <div style="font-family:Inter;font-size:14px;color:rgba(255,255,255,0.7)">Naveen Balaji<br><span style="font-size:12px;color:rgba(255,255,255,0.5)">Fullstack developer @Synechron</span></div>
+            <a href="https://www.linkedin.com/in/naveen-balaji-b987401b3/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile" title="View LinkedIn profile" style="margin-left:auto;flex-shrink:0;width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.75);transition:all 0.25s ease" style-hover="color:#FFFFFF;background:#F67C29;border-color:#F67C29"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"></path></svg></a>
+          </div>
+        </div>
+        <div style="width:380px;flex-shrink:0;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:32px" aria-hidden="true">
+          <div style="font-family:Georgia,serif;font-size:44px;color:#F67C29;line-height:1;margin-bottom:12px">"</div>
+          <p style="font-family:'Bricolage Grotesque',sans-serif;font-weight:500;font-size:1.2rem;line-height:1.45;color:#FFFFFF;margin:0 0 24px;min-height:110px">If there’s a complicated screen, give it to Surya. He’ll simplify it, make it look good, and probably create 12 more Figma variations just to be sure! A genuinely talented and fun teammate to work with.</p>
+          <div style="display:flex;align-items:center;gap:12px">
+            <img src="opt/slots/avatar-3.webp" alt="Deva Dharshini" loading="lazy" decoding="async" style="width:44px;height:44px;flex-shrink:0;border-radius:50%;object-fit:cover;display:block">
+            <div style="font-family:Inter;font-size:14px;color:rgba(255,255,255,0.7)">Deva Dharshini<br><span style="font-size:12px;color:rgba(255,255,255,0.5)">Sr. Product Designer @TripFactory</span></div>
+            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile" title="View LinkedIn profile" style="margin-left:auto;flex-shrink:0;width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.75);transition:all 0.25s ease" style-hover="color:#FFFFFF;background:#F67C29;border-color:#F67C29"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"></path></svg></a>
+          </div>
+        </div>
+        <div style="width:380px;flex-shrink:0;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:32px" aria-hidden="true">
+          <div style="font-family:Georgia,serif;font-size:44px;color:#F67C29;line-height:1;margin-bottom:12px">"</div>
+          <p style="font-family:'Bricolage Grotesque',sans-serif;font-weight:500;font-size:1.2rem;line-height:1.45;color:#FFFFFF;margin:0 0 24px;min-height:110px">Surya was great to work with. He understood our finance requirements quickly and delivered practical, user-friendly solutions with great attention to detail.</p>
+          <div style="display:flex;align-items:center;gap:12px">
+            <img src="opt/slots/avatar-1-dup.webp" alt="Naveen Kumar" loading="lazy" decoding="async" style="width:44px;height:44px;flex-shrink:0;border-radius:50%;object-fit:cover;display:block">
+            <div style="font-family:Inter;font-size:14px;color:rgba(255,255,255,0.7)">Naveen Kumar<br><span style="font-size:12px;color:rgba(255,255,255,0.5)">CA @EY</span></div>
+            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile" title="View LinkedIn profile" style="margin-left:auto;flex-shrink:0;width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.75);transition:all 0.25s ease" style-hover="color:#FFFFFF;background:#F67C29;border-color:#F67C29"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"></path></svg></a>
+          </div>
+        </div>
+        <div style="width:380px;flex-shrink:0;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:32px" aria-hidden="true">
+          <div style="font-family:Georgia,serif;font-size:44px;color:#F67C29;line-height:1;margin-bottom:12px">"</div>
+          <p style="font-family:'Bricolage Grotesque',sans-serif;font-weight:500;font-size:1.2rem;line-height:1.45;color:#FFFFFF;margin:0 0 24px;min-height:110px">Working with Surya from the early days of PropReturns was an incredible experience. He wasn’t just a UI/UX designer, he became a key part of how we shaped the product.</p>
+          <div style="display:flex;align-items:center;gap:12px">
+            <img src="opt/slots/avatar-4.webp" alt="Jayant Panwar" loading="lazy" decoding="async" style="width:44px;height:44px;flex-shrink:0;border-radius:50%;object-fit:cover;display:block">
+            <div style="font-family:Inter;font-size:14px;color:rgba(255,255,255,0.7)">Jayant Panwar<br><span style="font-size:12px;color:rgba(255,255,255,0.5)">Co-Founder @Propreturns</span></div>
+            <a href="https://www.linkedin.com/in/jayant-panwar/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile" title="View LinkedIn profile" style="margin-left:auto;flex-shrink:0;width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.75);transition:all 0.25s ease" style-hover="color:#FFFFFF;background:#F67C29;border-color:#F67C29"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"></path></svg></a>
+          </div>
+        </div>
+        <div style="width:380px;flex-shrink:0;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:32px" aria-hidden="true">
+          <div style="font-family:Georgia,serif;font-size:44px;color:#F67C29;line-height:1;margin-bottom:12px">"</div>
+          <p style="font-family:'Bricolage Grotesque',sans-serif;font-weight:500;font-size:1.2rem;line-height:1.45;color:#FFFFFF;margin:0 0 24px;min-height:110px">Surya is a thoughtful designer who understands both users and developers. His clear communication, attention to detail, and practical approach make collaboration effortless.</p>
+          <div style="display:flex;align-items:center;gap:12px">
+            <img src="opt/slots/avatar-2-dup.webp" alt="Naveen Balaji" loading="lazy" decoding="async" style="width:44px;height:44px;flex-shrink:0;border-radius:50%;object-fit:cover;display:block">
+            <div style="font-family:Inter;font-size:14px;color:rgba(255,255,255,0.7)">Naveen Balaji<br><span style="font-size:12px;color:rgba(255,255,255,0.5)">Fullstack developer @Synechron</span></div>
+            <a href="https://www.linkedin.com/in/naveen-balaji-b987401b3/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile" title="View LinkedIn profile" style="margin-left:auto;flex-shrink:0;width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.75);transition:all 0.25s ease" style-hover="color:#FFFFFF;background:#F67C29;border-color:#F67C29"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"></path></svg></a>
+          </div>
+        </div>
+        <div style="width:380px;flex-shrink:0;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:32px" aria-hidden="true">
+          <div style="font-family:Georgia,serif;font-size:44px;color:#F67C29;line-height:1;margin-bottom:12px">"</div>
+          <p style="font-family:'Bricolage Grotesque',sans-serif;font-weight:500;font-size:1.2rem;line-height:1.45;color:#FFFFFF;margin:0 0 24px;min-height:110px">If there’s a complicated screen, give it to Surya. He’ll simplify it, make it look good, and probably create 12 more Figma variations just to be sure! A genuinely talented and fun teammate to work with.</p>
+          <div style="display:flex;align-items:center;gap:12px">
+            <img src="opt/slots/avatar-3.webp" alt="Deva Dharshini" loading="lazy" decoding="async" style="width:44px;height:44px;flex-shrink:0;border-radius:50%;object-fit:cover;display:block">
+            <div style="font-family:Inter;font-size:14px;color:rgba(255,255,255,0.7)">Deva Dharshini<br><span style="font-size:12px;color:rgba(255,255,255,0.5)">Sr. Product Designer @TripFactory</span></div>
+            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile" title="View LinkedIn profile" style="margin-left:auto;flex-shrink:0;width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.75);transition:all 0.25s ease" style-hover="color:#FFFFFF;background:#F67C29;border-color:#F67C29"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"></path></svg></a>
+          </div>
+        </div>
+        <div style="width:380px;flex-shrink:0;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:32px" aria-hidden="true">
+          <div style="font-family:Georgia,serif;font-size:44px;color:#F67C29;line-height:1;margin-bottom:12px">"</div>
+          <p style="font-family:'Bricolage Grotesque',sans-serif;font-weight:500;font-size:1.2rem;line-height:1.45;color:#FFFFFF;margin:0 0 24px;min-height:110px">Surya was great to work with. He understood our finance requirements quickly and delivered practical, user-friendly solutions with great attention to detail.</p>
+          <div style="display:flex;align-items:center;gap:12px">
+            <img src="opt/slots/avatar-1-dup.webp" alt="Naveen Kumar" loading="lazy" decoding="async" style="width:44px;height:44px;flex-shrink:0;border-radius:50%;object-fit:cover;display:block">
+            <div style="font-family:Inter;font-size:14px;color:rgba(255,255,255,0.7)">Naveen Kumar<br><span style="font-size:12px;color:rgba(255,255,255,0.5)">CA @EY</span></div>
+            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile" title="View LinkedIn profile" style="margin-left:auto;flex-shrink:0;width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.75);transition:all 0.25s ease" style-hover="color:#FFFFFF;background:#F67C29;border-color:#F67C29"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"></path></svg></a>
+          </div>
+        </div>
+        <div style="width:380px;flex-shrink:0;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:32px" aria-hidden="true">
+          <div style="font-family:Georgia,serif;font-size:44px;color:#F67C29;line-height:1;margin-bottom:12px">"</div>
+          <p style="font-family:'Bricolage Grotesque',sans-serif;font-weight:500;font-size:1.2rem;line-height:1.45;color:#FFFFFF;margin:0 0 24px;min-height:110px">Working with Surya from the early days of PropReturns was an incredible experience. He wasn’t just a UI/UX designer, he became a key part of how we shaped the product.</p>
+          <div style="display:flex;align-items:center;gap:12px">
+            <img src="opt/slots/avatar-4.webp" alt="Jayant Panwar" loading="lazy" decoding="async" style="width:44px;height:44px;flex-shrink:0;border-radius:50%;object-fit:cover;display:block">
+            <div style="font-family:Inter;font-size:14px;color:rgba(255,255,255,0.7)">Jayant Panwar<br><span style="font-size:12px;color:rgba(255,255,255,0.5)">Co-Founder @Propreturns</span></div>
+            <a href="https://www.linkedin.com/in/jayant-panwar/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile" title="View LinkedIn profile" style="margin-left:auto;flex-shrink:0;width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.75);transition:all 0.25s ease" style-hover="color:#FFFFFF;background:#F67C29;border-color:#F67C29"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"></path></svg></a>
+          </div>
+        </div>
+        <div style="width:380px;flex-shrink:0;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:32px" aria-hidden="true">
+          <div style="font-family:Georgia,serif;font-size:44px;color:#F67C29;line-height:1;margin-bottom:12px">"</div>
+          <p style="font-family:'Bricolage Grotesque',sans-serif;font-weight:500;font-size:1.2rem;line-height:1.45;color:#FFFFFF;margin:0 0 24px;min-height:110px">Surya is a thoughtful designer who understands both users and developers. His clear communication, attention to detail, and practical approach make collaboration effortless.</p>
+          <div style="display:flex;align-items:center;gap:12px">
+            <img src="opt/slots/avatar-2-dup.webp" alt="Naveen Balaji" loading="lazy" decoding="async" style="width:44px;height:44px;flex-shrink:0;border-radius:50%;object-fit:cover;display:block">
+            <div style="font-family:Inter;font-size:14px;color:rgba(255,255,255,0.7)">Naveen Balaji<br><span style="font-size:12px;color:rgba(255,255,255,0.5)">Fullstack developer @Synechron</span></div>
+            <a href="https://www.linkedin.com/in/naveen-balaji-b987401b3/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile" title="View LinkedIn profile" style="margin-left:auto;flex-shrink:0;width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.75);transition:all 0.25s ease" style-hover="color:#FFFFFF;background:#F67C29;border-color:#F67C29"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"></path></svg></a>
+          </div>
+        </div>
+        <div style="width:380px;flex-shrink:0;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:32px" aria-hidden="true">
+          <div style="font-family:Georgia,serif;font-size:44px;color:#F67C29;line-height:1;margin-bottom:12px">"</div>
+          <p style="font-family:'Bricolage Grotesque',sans-serif;font-weight:500;font-size:1.2rem;line-height:1.45;color:#FFFFFF;margin:0 0 24px;min-height:110px">If there’s a complicated screen, give it to Surya. He’ll simplify it, make it look good, and probably create 12 more Figma variations just to be sure! A genuinely talented and fun teammate to work with.</p>
+          <div style="display:flex;align-items:center;gap:12px">
+            <img src="opt/slots/avatar-3.webp" alt="Deva Dharshini" loading="lazy" decoding="async" style="width:44px;height:44px;flex-shrink:0;border-radius:50%;object-fit:cover;display:block">
+            <div style="font-family:Inter;font-size:14px;color:rgba(255,255,255,0.7)">Deva Dharshini<br><span style="font-size:12px;color:rgba(255,255,255,0.5)">Sr. Product Designer @TripFactory</span></div>
+            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile" title="View LinkedIn profile" style="margin-left:auto;flex-shrink:0;width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.75);transition:all 0.25s ease" style-hover="color:#FFFFFF;background:#F67C29;border-color:#F67C29"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"></path></svg></a>
+          </div>
+        </div>
+        <div style="width:380px;flex-shrink:0;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:32px" aria-hidden="true">
+          <div style="font-family:Georgia,serif;font-size:44px;color:#F67C29;line-height:1;margin-bottom:12px">"</div>
+          <p style="font-family:'Bricolage Grotesque',sans-serif;font-weight:500;font-size:1.2rem;line-height:1.45;color:#FFFFFF;margin:0 0 24px;min-height:110px">Surya was great to work with. He understood our finance requirements quickly and delivered practical, user-friendly solutions with great attention to detail.</p>
+          <div style="display:flex;align-items:center;gap:12px">
+            <img src="opt/slots/avatar-1-dup.webp" alt="Naveen Kumar" loading="lazy" decoding="async" style="width:44px;height:44px;flex-shrink:0;border-radius:50%;object-fit:cover;display:block">
+            <div style="font-family:Inter;font-size:14px;color:rgba(255,255,255,0.7)">Naveen Kumar<br><span style="font-size:12px;color:rgba(255,255,255,0.5)">CA @EY</span></div>
+            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile" title="View LinkedIn profile" style="margin-left:auto;flex-shrink:0;width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.75);transition:all 0.25s ease" style-hover="color:#FFFFFF;background:#F67C29;border-color:#F67C29"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"></path></svg></a>
+          </div>
+        </div>
+        <div style="width:380px;flex-shrink:0;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:32px" aria-hidden="true">
+          <div style="font-family:Georgia,serif;font-size:44px;color:#F67C29;line-height:1;margin-bottom:12px">"</div>
+          <p style="font-family:'Bricolage Grotesque',sans-serif;font-weight:500;font-size:1.2rem;line-height:1.45;color:#FFFFFF;margin:0 0 24px;min-height:110px">Working with Surya from the early days of PropReturns was an incredible experience. He wasn’t just a UI/UX designer, he became a key part of how we shaped the product.</p>
+          <div style="display:flex;align-items:center;gap:12px">
+            <img src="opt/slots/avatar-4.webp" alt="Jayant Panwar" loading="lazy" decoding="async" style="width:44px;height:44px;flex-shrink:0;border-radius:50%;object-fit:cover;display:block">
+            <div style="font-family:Inter;font-size:14px;color:rgba(255,255,255,0.7)">Jayant Panwar<br><span style="font-size:12px;color:rgba(255,255,255,0.5)">Co-Founder @Propreturns</span></div>
+            <a href="https://www.linkedin.com/in/jayant-panwar/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile" title="View LinkedIn profile" style="margin-left:auto;flex-shrink:0;width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.75);transition:all 0.25s ease" style-hover="color:#FFFFFF;background:#F67C29;border-color:#F67C29"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"></path></svg></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  </sc-if>
+
+  <section id="contact" style="background:#F67C29;color:#171717;padding:clamp(72px,10vw,130px) 0 clamp(48px,6vw,64px)">
+    <div style="max-width:1200px;margin:0 auto;padding:0 clamp(24px,6vw,72px)">
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:32px;flex-wrap:wrap;margin:0 0 48px">
+        <h2 class="reveal" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(2.75rem,9vw,6rem);line-height:0.95;margin:0;color:#171717">Let's<br>design &amp; build<br>something great.</h2>
+        <img class="reveal" src="opt/web/signature.webp" alt="Surya signature" loading="lazy" decoding="async" style="width:clamp(160px,24vw,300px);height:auto;display:block;filter:brightness(0);opacity:0.85;margin-bottom:4px">
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:48px;padding-bottom:44px;border-bottom:1px solid rgba(23,23,23,0.15)">
+        <div style="flex:1 1 220px">
+          <div style="font-family:Inter;font-weight:600;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#171717;opacity:0.65;margin-bottom:10px">Email</div>
+          <a href="mailto:ssdecides@gmail.com?subject=Hello%20Surya%20%E2%80%94%20from%20your%20portfolio&amp;body=Hi%20Surya%2C%0A%0A" style="font-family:Inter;font-size:19px;color:#171717;text-decoration:none;border-bottom:1px solid rgba(23,23,23,0.3)" style-hover="color:#FFFFFF;border-color:#FFFFFF">ssdecides@gmail.com</a>
+        </div>
+        <div style="flex:1 1 220px">
+          <div style="font-family:Inter;font-weight:600;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#171717;opacity:0.65;margin-bottom:10px">Phone</div>
+          <div style="font-family:Inter;font-size:19px;color:#171717">+91 97877 48686</div>
+        </div>
+        <div style="flex:1 1 220px">
+          <div style="font-family:Inter;font-weight:600;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#171717;opacity:0.65;margin-bottom:10px">Location</div>
+          <div style="font-family:Inter;font-size:19px;color:#171717">Coimbatore, Tamil Nadu, India</div>
+        </div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:14px;padding-top:32px">
+        <a href="https://www.linkedin.com/in/ssdecides" target="_blank" style="border:1px solid rgba(23,23,23,0.3);color:#171717;font-family:Inter;font-weight:600;font-size:13px;padding:11px 22px;border-radius:100px;text-decoration:none" style-hover="border-color:#171717;background:rgba(23,23,23,0.06);transform:translateY(-2px)">LinkedIn</a>
+        <a href="https://dribbble.com/ssdecides" target="_blank" style="border:1px solid rgba(23,23,23,0.3);color:#171717;font-family:Inter;font-weight:600;font-size:13px;padding:11px 22px;border-radius:100px;text-decoration:none" style-hover="border-color:#171717;background:rgba(23,23,23,0.06);transform:translateY(-2px)">Dribbble</a>
+        <a href="https://www.behance.net/ssdecides" target="_blank" style="border:1px solid rgba(23,23,23,0.3);color:#171717;font-family:Inter;font-weight:600;font-size:13px;padding:11px 22px;border-radius:100px;text-decoration:none" style-hover="border-color:#171717;background:rgba(23,23,23,0.06);transform:translateY(-2px)">Behance</a>
+      </div>
+      <div style="margin-top:56px;font-family:Inter;font-size:13px;color:#171717;opacity:0.65">© 2026 Surya D. — Product Designer</div>
+    </div>
+  </section>
+
+
+  <button type="button" class="{{ letterBadgeClass }}" onClick="{{ openLetter }}" aria-label="Read my letter" style="position:fixed;right:22px;bottom:22px;z-index:60;width:96px;height:96px;border-radius:50%;background:#171717;border:1px solid rgba(224,223,191,0.16);box-shadow:0 14px 34px rgba(0,0,0,0.45);padding:0;cursor:pointer;display:flex;align-items:center;justify-content:center">
+    <svg class="ltr-ring" viewBox="0 0 124 124" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;overflow:visible">
+      <defs><path id="ltr-circle" d="M62,62 m-47,0 a47,47 0 1,1 94,0 a47,47 0 1,1 -94,0"></path></defs>
+      <text style="font-family:Inter,sans-serif;font-weight:700;font-size:10px;letter-spacing:2.4px;fill:#F5F4E8"><textPath href="#ltr-circle" textLength="292" lengthAdjust="spacing">READ MY LETTER ✦ READ MY LETTER ✦</textPath></text>
+    </svg>
+    <span class="ltr-env" aria-hidden="true" style="position:relative;display:block;width:36px;height:26px;border-radius:5px;background:#F67C29;box-shadow:0 6px 14px rgba(246,124,41,0.35)">
+      <svg viewBox="0 0 48 34" style="position:absolute;inset:0;width:100%;height:100%"><path d="M3 30 L19 17 M45 30 L29 17" stroke="#C85A14" stroke-width="1.4" fill="none" stroke-linecap="round"></path></svg>
+      <svg class="ltr-flap" viewBox="0 0 48 20" style="position:absolute;left:0;top:0;width:100%;height:15px;overflow:visible"><path d="M1.5 2 L24 19 L46.5 2" fill="#FF9148" stroke="#C85A14" stroke-width="1.4" stroke-linejoin="round"></path></svg>
+      <span style="position:absolute;left:50%;top:10px;transform:translateX(-50%);width:13px;height:13px;border-radius:50%;background:#7A2E0E;box-shadow:0 1px 0 rgba(255,255,255,0.25) inset;display:flex;align-items:center;justify-content:center;font-family:'Caveat',cursive;font-weight:700;font-size:11px;line-height:1;color:#FFE9D6">S</span>
+    </span>
+    <sc-if value="{{ letterUnread }}" hint-placeholder-val="{{ true }}">
+      <span aria-hidden="true" style="position:absolute;top:0;left:0;width:22px;height:22px">
+        <span class="ltr-ping" style="position:absolute;inset:0;border-radius:50%;background:#F67C29"></span>
+        <span style="position:absolute;inset:0;border-radius:50%;background:#F67C29;border:2px solid #171717;display:flex;align-items:center;justify-content:center;font-family:Inter;font-weight:700;font-size:11px;color:#171717">1</span>
+      </span>
+    </sc-if>
+    <span class="ltr-tip" style="position:absolute;right:calc(100% + 14px);top:50%;white-space:nowrap;background:#FFFCF4;color:#2A1A10;font-family:'Caveat',cursive;font-weight:600;font-size:21px;line-height:1;padding:8px 14px 9px;border-radius:12px;box-shadow:0 10px 24px rgba(0,0,0,0.35)">psst… I wrote you something</span>
+  </button>
+
+  <div class="{{ letterRootClass }}" data-ltr-root="1" role="dialog" aria-modal="true" aria-label="A letter from Surya" style="position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:40px 16px">
+    <div class="ltr-backdrop" onClick="{{ closeLetter }}" style="position:absolute;inset:0;background:rgba(12,7,4,0.6);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)"></div>
+    <button type="button" class="ltr-close" onClick="{{ closeLetter }}" aria-label="Close letter" style="position:fixed;top:24px;right:24px;z-index:3;width:52px;height:52px;border-radius:50%;background:rgba(23,23,23,0.75);border:1px solid rgba(245,244,232,0.2);color:#F5F4E8;cursor:pointer;display:flex;align-items:center;justify-content:center">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+    </button>
+    <div class="ltr-card" style="position:relative;z-index:2;width:100%;max-width:760px">
+      <div class="ltr-tape" aria-hidden="true" style="position:absolute;top:-14px;left:50%;z-index:2;width:150px;height:40px;background:rgba(246,170,130,0.72);box-shadow:0 2px 6px rgba(0,0,0,0.08)"></div>
+      <div class="ltr-scroll" ref="{{ letterScrollRef }}" style="max-height:calc(100vh - 80px);overflow-y:auto;background:#FFFCF4;border-radius:14px;box-shadow:0 40px 80px rgba(0,0,0,0.5);padding:64px 64px 96px;font-family:'Caveat',cursive;color:#2A1A10">
+        <div class="ltr-photo">
+          <image-slot id="letter-photo" shape="rounded" radius="6" placeholder="Drop an illustration for your letter" style="width:100%;aspect-ratio:16/7.2;display:block"></image-slot>
+        </div>
+        <div class="ltr-meta" style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;margin:36px 0 22px">
+          <span style="font-weight:700;font-size:26px;color:#E0661A">A little note</span>
+          <span style="font-weight:500;font-size:22px;color:#6B5647">{{ letterDate }}</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:4px;font-weight:500;font-size:clamp(20px,2.4vw,26px);line-height:1.45">
+          <div class="ltr-line" style="--delay:1s;--dur:1.1s;margin-bottom:10px;width:fit-content;padding-right:12px"><img loading="lazy" src="opt/web/hi-there.webp" alt="Hi there!" decoding="async" style="width:clamp(170px,22vw,250px);height:auto;display:block;margin-left:calc(clamp(170px,22vw,250px) * -0.085);margin-top:calc(clamp(170px,22vw,250px) * -0.04);margin-bottom:calc(clamp(170px,22vw,250px) * -0.05);filter:brightness(0);opacity:0.88"></div>
+          <div class="ltr-line ltr-para" style="--delay:2.2s;--dur:2.9s;width:100%;text-align:justify;text-justify:inter-word;hyphens:auto;-webkit-hyphens:auto;text-wrap:pretty">Thanks for stopping by. I know you probably have a dozen tabs open, so this means a lot.</div>
+          <div class="ltr-line ltr-para" style="--delay:5.3s;--dur:6.3s;margin-top:18px;width:100%;text-align:justify;text-justify:inter-word;hyphens:auto;-webkit-hyphens:auto;text-wrap:pretty">For the last 5+ years I've designed products for people who don't have time to figure things out: delivery partners, operators and busy teams. Making the complicated feel obvious is what keeps me going.</div>
+          <div class="ltr-line ltr-para" style="--delay:11.9s;--dur:3s;margin-top:18px;width:100%;text-align:justify;text-justify:inter-word;hyphens:auto;-webkit-hyphens:auto;text-wrap:pretty">If something here made you curious, I'd love to hear from you. A call, a coffee, or just a hello.</div>
+          <div class="ltr-line" style="--delay:15s;--dur:1s;margin-top:18px;width:fit-content;padding-right:12px">Ring me on <a href="tel:+919787748686" style="color:#E0661A;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px">+91 97877 48686</a></div>
+          <div class="ltr-line" style="--delay:16.2s;--dur:.8s;margin-top:28px;width:fit-content;padding-right:8px">Warmly,</div>
+          <div class="ltr-line" style="--delay:17.1s;--dur:1.2s;width:fit-content;padding:6px 16px 0 0"><img loading="lazy" src="opt/web/signature.webp" alt="Surya" decoding="async" style="width:clamp(130px,16vw,180px);height:auto;display:block;margin-left:calc(clamp(130px,16vw,180px) * -0.14);margin-top:calc(clamp(130px,16vw,180px) * -0.03);filter:brightness(0);opacity:0.88"></div>
+        </div>
+      </div>
+      <button type="button" class="ltr-skip" onClick="{{ skipLetter }}" style="position:absolute;left:50%;bottom:-22px;z-index:3;display:inline-flex;align-items:center;gap:6px;background:#171717;color:#F5F4E8;border:1px solid rgba(245,244,232,0.12);font-family:Inter;font-weight:600;font-size:15px;padding:14px 24px;border-radius:100px;cursor:pointer;box-shadow:0 10px 24px rgba(0,0,0,0.35)" style-hover="background:#2A1A10">Skip to the end ↓</button>
+    </div>
+  </div>
+
+  <sc-if value="{{ ndaOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeNda }}" role="dialog" aria-modal="true" aria-labelledby="nda-title" style="position:fixed;inset:0;z-index:300;background:rgba(10,8,6,0.74);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:20px;overflow-y:auto">
+      <div onClick="{{ stopNda }}" style="position:relative;width:100%;max-width:900px;margin:auto;background:#1A1816;border:1px solid rgba(245,244,232,0.1);border-radius:28px;box-shadow:0 30px 80px rgba(0,0,0,0.55);overflow:hidden;display:flex;flex-wrap:wrap-reverse">
+        <button type="button" onClick="{{ closeNda }}" aria-label="Close" style="position:absolute;top:16px;right:16px;z-index:3;width:44px;height:44px;border-radius:100px;border:1px solid rgba(245,244,232,0.1);background:rgba(26,24,22,0.7);color:#E0DFBF;cursor:pointer;display:flex;align-items:center;justify-content:center" style-hover="background:rgba(245,244,232,0.12)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+
+        <div data-nda-body="1" style="flex:1 1 400px;min-width:0;padding:clamp(28px,4.5vw,52px);display:flex;flex-direction:column;align-items:flex-start">
+          <div style="width:56px;height:56px;border-radius:16px;background:rgba(246,124,41,0.12);border:1px solid rgba(246,124,41,0.25);display:flex;align-items:center;justify-content:center;margin-bottom:28px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F67C29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10.5" width="15" height="10" rx="2.5"></rect><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"></path></svg></div>
+          <div style="font-family:Inter;font-weight:600;font-size:12px;letter-spacing:0.22em;text-transform:uppercase;color:#F67C29;margin-bottom:12px">Under NDA</div>
+          <h2 id="nda-title" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(2rem,4.2vw,2.9rem);line-height:1.04;letter-spacing:-0.02em;color:#F5F4E8;margin:0 0 20px;text-wrap:balance">Some details are confidential</h2>
+          <p style="font-family:Inter;font-size:16px;line-height:1.65;color:#C9C9B8;margin:0 0 14px;max-width:460px;text-wrap:pretty">This project is covered by an NDA, so I can’t share the actual product screens or mockups.</p>
+          <p style="font-family:Inter;font-size:15px;line-height:1.65;color:#9A9985;margin:0 0 32px;max-width:460px;text-wrap:pretty">You can, however, explore my design process, problem definition, UX challenges, approach, key decisions, and the impact of the work.</p>
+          <div data-nda-ctas="1" style="display:flex;flex-wrap:wrap;gap:12px">
+            <button type="button" onClick="{{ exploreNda }}" style="display:inline-flex;align-items:center;gap:10px;background:#F67C29;color:#1A0E06;border:none;font-family:Inter;font-weight:600;font-size:16px;padding:16px 28px;border-radius:100px;cursor:pointer" style-hover="background:#FF8C3D;transform:translateY(-2px)">Explore the process<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
+            <a href="Resume.dc.html" style="display:inline-flex;align-items:center;gap:10px;background:transparent;color:#F5F4E8;border:1px solid rgba(245,244,232,0.22);font-family:Inter;font-weight:600;font-size:16px;padding:15px 26px;border-radius:100px;text-decoration:none" style-hover="background:rgba(245,244,232,0.08);transform:translateY(-2px)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.3 7.6L3 21l1.9-5.7A8.5 8.5 0 1 1 21 11.5z"></path></svg>Let’s connect</a>
+          </div>
+        </div>
+
+        <div aria-hidden="true" data-nda-art="1" style="flex:1 1 300px;min-height:260px;position:relative;overflow:hidden;background:radial-gradient(circle at 70% 40%,rgba(246,124,41,0.16),rgba(246,124,41,0) 62%)">
+          <div style="position:absolute;width:420px;height:420px;border-radius:50%;right:-140px;top:-60px;background:rgba(246,124,41,0.05);border:1px solid rgba(246,124,41,0.12)"></div>
+          <div style="position:absolute;left:50%;top:50%;width:230px;height:190px;transform:translate(-62%,-58%) rotate(-6deg);background:#24211E;border:1px solid rgba(245,244,232,0.08);border-radius:20px"></div>
+          <div style="position:absolute;left:50%;top:50%;width:240px;height:200px;transform:translate(-55%,-60%);background:#2A2723;border:1px solid rgba(245,244,232,0.1);border-radius:20px;box-shadow:0 20px 40px rgba(0,0,0,0.35);padding:24px;box-sizing:border-box;display:flex;flex-direction:column;gap:20px">
+            <div style="display:flex;align-items:center;gap:14px"><span style="width:32px;height:32px;border-radius:50%;background:rgba(246,124,41,0.45);flex-shrink:0"></span><span style="display:flex;flex-direction:column;gap:7px;flex:1"><span style="height:8px;border-radius:8px;background:rgba(245,244,232,0.16)"></span><span style="height:8px;width:60%;border-radius:8px;background:rgba(245,244,232,0.1)"></span></span></div>
+            <div style="display:flex;align-items:center;gap:14px"><span style="width:32px;height:32px;border-radius:8px;background:rgba(224,223,191,0.28);flex-shrink:0"></span><span style="display:flex;flex-direction:column;gap:7px;flex:1"><span style="height:8px;border-radius:8px;background:rgba(245,244,232,0.16)"></span><span style="height:8px;width:72%;border-radius:8px;background:rgba(245,244,232,0.1)"></span></span></div>
+            <div style="display:flex;align-items:center;gap:14px"><span style="width:0;height:0;border-left:16px solid transparent;border-right:16px solid transparent;border-bottom:28px solid rgba(201,201,184,0.3);flex-shrink:0"></span><span style="display:flex;flex-direction:column;gap:7px;flex:1"><span style="height:8px;width:80%;border-radius:8px;background:rgba(245,244,232,0.16)"></span></span></div>
+          </div>
+          <div style="position:absolute;left:50%;top:50%;width:150px;height:130px;transform:translate(0%,-2%);background:rgba(42,30,22,0.72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(246,124,41,0.3);border-radius:20px;box-shadow:0 20px 44px rgba(0,0,0,0.45);display:flex;align-items:center;justify-content:center">
+            <svg width="54" height="62" viewBox="0 0 54 62"><path d="M14 27V18a13 13 0 0 1 26 0v9" fill="none" stroke="#F67C29" stroke-width="6" stroke-linecap="round"></path><rect x="4" y="26" width="46" height="34" rx="9" fill="#F67C29"></rect><circle cx="27" cy="41" r="4.5" fill="#1A0E06"></circle><rect x="25" y="43" width="4" height="8" rx="2" fill="#1A0E06"></rect></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;showAwards&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Sections&quot;},
+  &quot;showTestimonials&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Sections&quot;}
+}">
+class Component extends DCLogic {
+  state = { scrolled: false, letterOpen: false, letterSkip: false, letterDone: false, letterRead: (() => { try { return localStorage.getItem('surya-letter-read') === '1'; } catch (e) { return false; } })() };
+  letterScrollRef = React.createRef();
+
+  openLetter = () => {
+    clearTimeout(this._ltrTimer);
+    try { localStorage.setItem('surya-letter-read', '1'); } catch (e) {}
+    if (this.letterScrollRef.current) this.letterScrollRef.current.scrollTop = 0;
+    document.body.style.overflow = 'hidden';
+    this.setState({ letterOpen: true, letterSkip: false, letterDone: false, letterRead: true });
+    this._ltrTimer = setTimeout(() => this.setState({ letterDone: true }), 18600);
+  };
+
+  closeLetter = () => {
+    clearTimeout(this._ltrTimer);
+    document.body.style.overflow = '';
+    this.setState({ letterOpen: false });
+  };
+
+  skipLetter = () => {
+    clearTimeout(this._ltrTimer);
+    this.setState({ letterSkip: true, letterDone: true });
+    requestAnimationFrame(() => requestAnimationFrame(() => { const el = this.letterScrollRef.current; if (el) el.scrollTop = el.scrollHeight; }));
+  };
+
+  componentWillUnmount() { clearTimeout(this._ltrTimer); document.removeEventListener('keydown', this._ltrKey); cancelAnimationFrame(this._ppRaf); }
+
+  ppAutoScroll() {
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    let last = performance.now(), el = null, pos = 0, hold = 0;
+    const pause = () => { if (el) el._ppPaused = true; };
+    const resume = () => { if (el) { el._ppPaused = false; pos = el.scrollLeft; } };
+    const tick = (t) => {
+      const dt = Math.min(64, t - last); last = t;
+      const cur = document.querySelector('[data-pp-auto]');
+      if (cur !== el) {
+        el = cur; pos = 0; hold = 1200;
+        if (el) {
+          el.addEventListener('mouseenter', pause); el.addEventListener('mouseleave', resume);
+          el.addEventListener('touchstart', pause, { passive: true }); el.addEventListener('touchend', () => setTimeout(resume, 2500), { passive: true });
+          el.addEventListener('scroll', () => { if (el._ppPaused) pos = el.scrollLeft; }, { passive: true });
+        }
+      }
+      if (el && !el._ppPaused) {
+        const r = el.getBoundingClientRect();
+        const visible = r.bottom > 0 && r.top < innerHeight;
+        const max = el.scrollWidth - el.clientWidth;
+        if (visible && max > 0) {
+          if (hold > 0) hold -= dt;
+          else if (pos >= max - 1) { hold = 1800; pos = 0; el.scrollTo({ left: 0, behavior: 'smooth' }); }
+          else { pos = Math.min(max, pos + dt * 0.04); el.scrollLeft = pos; }
+        }
+      }
+      this._ppRaf = requestAnimationFrame(tick);
+    };
+    this._ppRaf = requestAnimationFrame(tick);
+  }
+
+  componentDidMount() {
+    if (!window.__pdfDl) { window.__pdfDl = true; const s = document.createElement('script'); s.src = 'opt/resume-preview.js'; document.head.appendChild(s); }
+    this.ppAutoScroll();
+    this._ltrKey = (e) => { if (e.key === 'Escape' && this.state.letterOpen) this.closeLetter(); };
+    document.addEventListener('keydown', this._ltrKey);
+    this._ndaKey = (e) => { if (e.key === 'Escape' && this.state.ndaOpen) this.closeNda(); };
+    document.addEventListener('keydown', this._ndaKey);
+    document.addEventListener('click', (e) => {
+      const a = e.target.closest && e.target.closest('a[href]'); if (!a) return;
+      const href = decodeURIComponent(a.getAttribute('href') || '');
+      if (!/(Delivery Partner App|HealthSy User App|HealthSy Pharmacy Website|CRM Panel|Software Panel)\.dc\.html/.test(href)) return;
+      if (e.metaKey || e.ctrlKey || e.shiftKey) return;
+      e.preventDefault(); e.stopImmediatePropagation();
+      document.body.style.overflow = 'hidden';
+      this.setState({ ndaOpen: true, ndaHref: a.getAttribute('href') });
+    }, true);
+    document.addEventListener('click', (e) => {
+      const a = e.target.closest('a');
+      if (!a) return;
+      const href = a.getAttribute('href') || '';
+      if (!href || href.startsWith('#') || /^(tel:|mailto:)/i.test(href) || a.target === '_blank') return;
+      const bar = document.getElementById('page-loader-bar');
+      if (bar) bar.style.width = '80%';
+    }, true);
+    this._onScroll = () => {
+      const scrolled = window.scrollY > 24;
+      if (scrolled !== this.state.scrolled) this.setState({ scrolled });
+    };
+    window.addEventListener("scroll", this._onScroll, { passive: true });
+
+    const revealEls = Array.from(document.querySelectorAll(".reveal, .reveal-img, .reveal-fade"));
+    revealEls.forEach((el, i) => {
+      el.style.transitionDelay = ((i % 6) * 80) + "ms";
+      if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add("is-visible");
+    });
+    this._io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          this._io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: "0px 0px -40px 0px" });
+    revealEls.forEach((el) => this._io.observe(el));
+
+    if (window.location.hash) {
+      const id = window.location.hash.slice(1);
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY, behavior: "smooth" });
+      }, 150);
+    }
+
+    const taglines = ["0→1 Product Design.", "Design systems that scale.", "5+ years, still designing."];
+    let ti = 0;
+    const tagEl = document.getElementById("tagline-rotator");
+    if (tagEl) {
+      this._tagInterval = setInterval(() => {
+        tagEl.style.opacity = "0";
+        tagEl.style.transform = "translateY(8px)";
+        setTimeout(() => {
+          ti = (ti + 1) % taglines.length;
+          tagEl.textContent = taglines[ti];
+          tagEl.style.transform = "translateY(-8px)";
+          requestAnimationFrame(() => {
+            tagEl.style.opacity = "1";
+            tagEl.style.transform = "translateY(0)";
+          });
+        }, 400);
+      }, 2800);
+    }
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this._onScroll);
+    if (this._io) this._io.disconnect();
+    if (this._tagInterval) clearInterval(this._tagInterval);
+  }
+
+  toggleNav = () => this.setState(s => ({ navOpen: !(s && s.navOpen) }));
+
+  closeNav = () => this.setState({ navOpen: false });
+
+  ppVals() {
+    const isProd = (this.state.ppView || 'products') === 'products';
+    const tab = (on) => ({ fontFamily: 'Inter', fontWeight: 600, fontSize: 14, padding: '10px 22px', borderRadius: 100, border: 'none', cursor: 'pointer', transition: 'background .3s ease, color .3s ease', background: on ? '#F67C29' : 'transparent', color: on ? '#171717' : '#A8A8A8' });
+    const links = { 9: 'HealthSy User App.dc.html', 13: 'Delivery Partner App.dc.html', 17: 'HealthSy Pharmacy Website.dc.html', 23: 'Software Panel.dc.html', 25: 'CRM Panel.dc.html' };
+    const raw = [
+      ['2021', [['PropReturns Design System', 'UI components, guidelines and design foundation.'], ['PropReturns Website', 'Company website from concept to launch.'], ['PropReturns Admin Panels', 'Internal tools for operations and management.'], ['Ecommerce Site', 'Property listings and transactions platform.']]],
+      ['2022', [["Reit's Ecommerce Site", 'Ecommerce platform for REIT products.'], ['Branding & Brochures', 'Brand identity, marketing collaterals and brochures.']]],
+      ['2023', [['Design System', 'UI components, patterns and design foundation.'], ['HealthSy Website', 'Public website from concept to launch.'], ['HealthSy User App', 'Medicine ordering and healthcare services.'], ['Pharmacy App', 'In-store operations and pharmacy management.'], ['Doctor App', 'For doctors to manage consultations and patients.'], ['Admin Panels', 'Internal tools and dashboards for various teams.']]],
+      ['2024', [['Delivery App', 'For delivery partners to manage orders.'], ['Prescription Writer', 'Create and manage digital prescriptions.'], ['InstaDoc App', 'Quick online consultation experience.'], ['HHSP — Home Healthcare Service', 'Nurse booking and home healthcare services.']]],
+      ['2025', [['Pharmacy Website', 'Medicine ordering and store services.'], ['Kiosk App', 'In-store kiosk for healthcare consultation and services.'], ['Pharmacy Subadmin Panel', 'Store level management tools.'], ['WhatsApp & Support System', 'Customer support and communication.'], ['Marketing Landing Pages', 'Campaign pages for products and services.'], ['Marketing Campaigns and Brochures', 'Digital and print campaigns for brand and services.']]],
+      ['2026', [['Pharmacy Software', 'Complete pharmacy management system.'], ['Central Team Software', 'Internal platform for central operations.'], ['CRM / BD Platform', 'Lead management and business development.']]]
+    ];
+    let n = 0;
+    const ppYears = raw.map(([year, items]) => ({ year, items: items.map(([title, desc]) => {
+      n++; const href = links[n];
+      return { num: String(n).padStart(2, '0'), title, desc, href, linkTitle: href ? 'View case study' : undefined,
+        cardStyle: { display: 'flex', gap: 14, alignItems: 'flex-start', padding: 16, borderRadius: 16, textDecoration: 'none', background: 'rgba(224,223,191,0.03)', border: '1px solid rgba(224,223,191,0.1)', cursor: href ? 'pointer' : 'default', transition: 'transform .3s ease, border-color .3s ease, background .3s ease' },
+        cardHover: href ? { transform: 'translateY(-3px)', borderColor: 'rgba(246,124,41,0.5)', background: 'rgba(246,124,41,0.06)' } : {} };
+    }), count: items.length + (items.length === 1 ? ' product' : ' products') }));
+    const I = { users: 'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75', bulb: 'M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z', grid: 'M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7zM3 14h7v7H3z', cube: 'M21 16V8l-9-5-9 5v8l9 5 9-5zM3.3 7L12 12l8.7-5M12 22V12', msg: 'M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2zM8 9h8M8 13h5', palette: 'M12 22a10 10 0 1 1 10-10c0 2.8-2.2 4-4 4h-2a2 2 0 0 0-1.4 3.4A1.7 1.7 0 0 1 12 22zM7.5 10.5h.01M12 7.5h.01M16.5 10.5h.01', search: 'M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM21 21l-4.35-4.35', spark: 'M12 3v4M12 17v4M3 12h4M17 12h4M12 8l1.5 2.5L16 12l-2.5 1.5L12 16l-1.5-2.5L8 12l2.5-1.5z', boxes: 'M12 2l4 2.3v4.6L12 11 8 8.9V4.3zM7 11l4 2.3v4.6L7 20l-4-2.1v-4.6zM17 11l4 2.3v4.6L17 20l-4-2.1v-4.6z', chart: 'M3 21h18M7 17v-6M12 17V6M17 17v-4', layers: 'M12 2L2 7l10 5 10-5zM2 17l10 5 10-5M2 12l10 5 10-5', rocket: 'M4.5 16.5c-1.5 1.3-2 5-2 5s3.7-.5 5-2c.7-.8.7-2.1-.1-2.9a2.2 2.2 0 0 0-2.9-.1zM12 15l-3-3a22 22 0 0 1 2-3.9A12.9 12.9 0 0 1 22 2c0 2.7-.8 7.5-6 11a22 22 0 0 1-4 2zM9 12H4s.6-3 2-4c1.6-1.1 5 0 5 0M12 15v5s3-.6 4-2c1.1-1.6 0-5 0-5', crown: 'M2 20h20M3 7l4 5 5-7 5 7 4-5-2 11H5z', target: 'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12zM12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4z' };
+    const st = (num, title, desc, icon) => ({ num, title, desc, icon: I[icon] });
+    const col = (year, steps, brand, tagline) => ({ year, steps, tagline });
+    const ppGroups = [
+      { brand: 'PropReturns', span: '2021 – 2022', color: '#E0DFBF', bg: 'transparent', iconBg: 'rgba(224,223,191,0.08)', iconLine: 'rgba(224,223,191,0.2)', columns: [
+        col('2021', [st('01', 'Understand the Business', 'Founder discussions, business goals and market exploration.', 'users'), st('02', 'Ideate & Plan', 'Product ideas, user research and feature planning.', 'bulb'), st('03', 'Design & Prototype', 'User flows, wireframes and high-fidelity designs.', 'grid')], '', 'Laying the foundation.'),
+        col('2022', [st('04', 'Build & Launch', 'Designed and built the product from scratch to launch.', 'cube'), st('05', 'Refine & Grow', 'User feedback, improvements and feature iterations.', 'msg'), st('06', 'Brand & Presence', 'Design system, brand identity and marketing collaterals including social media creatives.', 'palette')], '', 'Growing the product.')
+      ] },
+      { brand: 'HealthSy', span: '2023 – present', color: '#F67C29', bg: 'rgba(246,124,41,0.04)', iconBg: 'rgba(246,124,41,0.1)', iconLine: 'rgba(246,124,41,0.25)', columns: [
+        col('2023', [st('01', 'Business & Founders', 'Founder conversations, business requirements and product goals.', 'users'), st('02', 'Research & Insights', 'User needs, market understanding and opportunity mapping.', 'search'), st('03', 'Product Concept', 'Ideas, user flows, wireframes and prototypes.', 'spark'), st('04', 'Build From Scratch', 'Product architecture, UI design and MVP launch across multiple platforms.', 'boxes')], '', 'From zero to one.'),
+        col('2024', [st('05', 'Validate & Evolve', 'Customer feedback, testing and continuous product improvements.', 'chart'), st('06', 'Build the Team', 'Hiring, mentoring and building creative and product design teams.', 'users'), st('07', 'Design System & Brand', 'Design system, brand language and reusable components.', 'layers'), st('08', 'Ship & Scale', 'Development handoff, QA, testing and cross-functional collaboration.', 'rocket'), st('09', 'Lead Product Design', 'Design strategy, team direction and product evolution.', 'crown')], '', 'Building and scaling.'),
+        col('2025 – 2026', [st('10', 'Product Ownership', 'End-to-end product ownership, prioritisation, stakeholder alignment and driving the next phase of growth.', 'target')], '', 'Owning the product and driving what’s next.')
+      ] }
+    ];
+    return {
+      ppIsProducts: isProd, ppIsProcess: !isProd,
+      ppShowProducts: () => this.setState({ ppView: 'products' }),
+      ppShowProcess: () => this.setState({ ppView: 'process' }),
+      ppTabProductsStyle: tab(isProd), ppTabProcessStyle: tab(!isProd),
+      ppTitle: isProd ? 'The products I’ve built.' : 'The processes I built.',
+      ppDesc: isProd ? 'From PropReturns to HealthSy — a timeline of the digital products I helped design and bring to life.' : 'Two different companies. Two different journeys. From idea to launch, and from launch to scale — here’s how I shaped the products, teams and systems over the years.',
+      ppYears, ppGroups
+    };
+  }
+
+  closeNda = () => { document.body.style.overflow = ''; this.setState({ ndaOpen: false }); };
+  stopNda = (e) => e.stopPropagation();
+  exploreNda = () => {
+    const href = this.state.ndaHref; if (!href) return;
+    const bar = document.getElementById('page-loader-bar'); if (bar) bar.style.width = '80%';
+    try { const m = decodeURIComponent(href).match(/([^/]+)\.dc\.html/); if (m) sessionStorage.setItem('nda-seen:' + m[1], '1'); } catch (_) {}
+    document.body.style.overflow = ''; window.location.href = href;
+  };
+
+  renderVals() {
+
+    const _nav = !!(this.state && this.state.navOpen);
+
+    return Object.assign({}, this._baseVals(), { navOpen: _nav, navClosed: !_nav, toggleNav: this.toggleNav, closeNav: this.closeNav,
+      ndaOpen: !!this.state.ndaOpen, closeNda: this.closeNda, stopNda: this.stopNda, exploreNda: this.exploreNda });
+
+  }
+
+  _baseVals() {
+    const s = this.state.scrolled;
+    const st = this.state;
+    return {
+      openLetter: this.openLetter,
+      closeLetter: this.closeLetter,
+      skipLetter: this.skipLetter,
+      letterScrollRef: this.letterScrollRef,
+      awardsTrackRef: this.awardsTrackRef || (this.awardsTrackRef = React.createRef()),
+      awardsScrollPrev: () => { const el = this.awardsTrackRef && this.awardsTrackRef.current; if (el) el.scrollBy({ left: -el.clientWidth, behavior: 'smooth' }); },
+      awardsScrollNext: () => { const el = this.awardsTrackRef && this.awardsTrackRef.current; if (el) el.scrollBy({ left: el.clientWidth, behavior: 'smooth' }); },
+      letterUnread: !st.letterRead,
+      letterBadgeClass: 'ltr-badge' + (st.letterRead ? '' : ' is-unread'),
+      letterDate: new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }),
+      letterRootClass: 'ltr-root' + (st.letterOpen ? ' is-open' : '') + (st.letterSkip ? ' is-skip' : '') + (st.letterDone ? ' is-done' : ''),
+      ...this.ppVals(),
+      showAwards: this.props.showAwards ?? true,
+      showTestimonials: this.props.showTestimonials ?? true,
+      navPillStyle: {
+        padding: s ? "6px 10px" : "8px 12px",
+        boxShadow: s ? "0 10px 30px rgba(0,0,0,0.35)" : "0 4px 16px rgba(0,0,0,0.15)",
+        background: s ? "rgba(23,23,23,0.92)" : "rgba(23,23,23,0.7)",
+      },
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Inter:wght@400;500;600&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    html { scroll-behavior: smooth; }
+    body { margin: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+    * { box-sizing: border-box; }
+    a { color: #F67C29; }
+    a:hover { color: #FFA35C; }
+    image-slot[data-loaded][data-filled]::part(frame) { background: transparent; }
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.8s cubic-bezier(.16,.84,.44,1), transform 0.8s cubic-bezier(.16,.84,.44,1); }
+    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+    .reveal-img { opacity: 0; transform: translateY(20px) scale(0.97); transition: opacity 0.9s cubic-bezier(.16,.84,.44,1), transform 0.9s cubic-bezier(.16,.84,.44,1); }
+    .reveal-img.is-visible { opacity: 1; transform: translateY(0) scale(1); }
+    a, button { transition: color 0.3s ease, background-color 0.35s ease, border-color 0.3s ease, transform 0.35s cubic-bezier(.16,.84,.44,1), box-shadow 0.35s cubic-bezier(.16,.84,.44,1), opacity 0.3s ease; }
+    nav img { transition: transform 0.4s cubic-bezier(.16,.84,.44,1); }
+    nav a[href*="#top"]:hover img { transform: scale(1.08) rotate(-4deg); }
+    image-slot { transition: transform 0.6s cubic-bezier(.16,.84,.44,1), filter 0.4s ease; }
+    image-slot:hover { transform: scale(1.025); }
+    :focus-visible { outline: 2px solid #F67C29; outline-offset: 3px; border-radius: 4px; }
+    @keyframes rs-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+    @keyframes rs-float-b { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+    @keyframes rs-glow { 0%,100% { opacity: .85; } 50% { opacity: 1; } }
+    .rs-front { animation: rs-float 6s ease-in-out infinite; }
+    .rs-back { animation: rs-float-b 7s ease-in-out infinite; }
+    .rs-back.rs-r { animation-delay: -3s; }
+    .rs-glow { animation: rs-glow 5s ease-in-out infinite; }
+    .rs-front image-slot:hover { transform: none; }
+    @media (max-width: 980px) { .rs-back, .rs-note { display: none !important; } .rs-stage { min-height: 520px !important; } }
+    @media (prefers-reduced-motion: reduce) { .rs-front, .rs-back, .rs-glow { animation: none; } }
+  </style>
+  <style>
+    @keyframes ltr-spin { to { transform: rotate(360deg); } }
+    @keyframes ltr-bob { 0%,100% { transform: translateY(0) rotate(-4deg); } 50% { transform: translateY(-4px) rotate(3deg); } }
+    @keyframes ltr-ping { 0% { transform: scale(1); opacity: .7; } 100% { transform: scale(2.3); opacity: 0; } }
+    @keyframes ltr-write { from { clip-path: inset(-10% 100% -10% 0); } to { clip-path: inset(-10% -2% -10% 0); } }
+    @keyframes ltr-tip { from { opacity: 0; transform: translate(8px,-50%) scale(.9); } to { opacity: 1; transform: translate(0,-50%) scale(1); } }
+    .ltr-badge { transition: transform .35s cubic-bezier(.2,1.3,.4,1), box-shadow .35s ease; }
+    .ltr-badge:hover { transform: scale(1.06); box-shadow: 0 18px 40px rgba(0,0,0,0.5), 0 0 0 6px rgba(246,124,41,0.12); }
+    .ltr-ring { animation: ltr-spin 14s linear infinite; transform-origin: 50% 50%; }
+    .ltr-badge:hover .ltr-ring { animation-duration: 5s; }
+    .ltr-env { animation: ltr-bob 3.2s ease-in-out infinite; }
+    .ltr-flap { transform-origin: 50% 0; transition: transform .45s cubic-bezier(.2,1.2,.4,1); }
+    .ltr-badge:hover .ltr-flap { transform: perspective(80px) rotateX(165deg); }
+    .ltr-ping { animation: ltr-ping 1.8s ease-out infinite; }
+    @keyframes ltr-tip-out { to { opacity: 0; transform: translate(8px,-50%) scale(.9); } }
+    .ltr-tip { opacity: 0; transform: translate(8px,-50%) scale(.92); transform-origin: right center; transition: opacity .3s ease, transform .4s cubic-bezier(.2,1.3,.4,1); pointer-events: none; }
+    .ltr-badge.is-unread .ltr-tip { animation: ltr-tip .55s cubic-bezier(.2,1.3,.4,1) 2.5s forwards, ltr-tip-out .4s ease 9s forwards; }
+    .ltr-badge:hover .ltr-tip, .ltr-badge:focus-visible .ltr-tip { animation: none; opacity: 1; transform: translate(0,-50%) scale(1); }
+    .ltr-root .ltr-scroll { scroll-behavior: smooth; }
+    .ltr-root { visibility: hidden; pointer-events: none; transition: visibility 0s linear .5s; }
+    .ltr-root.is-open { visibility: visible; pointer-events: auto; transition-delay: 0s; }
+    .ltr-backdrop { opacity: 0; transition: opacity .45s ease; }
+    .is-open .ltr-backdrop { opacity: 1; }
+    .ltr-card { opacity: 0; transform: translateY(90px) scale(.88) rotate(-3deg); transition: transform .8s cubic-bezier(.2,1.15,.3,1), opacity .35s ease; }
+    .is-open .ltr-card { opacity: 1; transform: none; }
+    .ltr-close { opacity: 0; transform: scale(.6) rotate(-90deg); transition: opacity .4s ease .25s, transform .45s cubic-bezier(.2,1.3,.4,1) .25s, background .2s ease; }
+    .is-open .ltr-close { opacity: 1; transform: none; }
+    .ltr-close:hover { background: rgba(246,124,41,0.9) !important; }
+    .ltr-tape { opacity: 0; transform: translate(-50%,-28px) rotate(-10deg) scale(1.25); transition: opacity .3s ease, transform .5s cubic-bezier(.2,1.4,.4,1); }
+    .is-open .ltr-tape { opacity: 1; transform: translate(-50%,0) rotate(-2deg); transition-delay: .55s; }
+    .ltr-photo { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .7s cubic-bezier(.2,1,.3,1); }
+    .is-open .ltr-photo { opacity: 1; transform: none; transition-delay: .35s; }
+    .ltr-meta { opacity: 0; transition: opacity .5s ease; }
+    .is-open .ltr-meta { opacity: 1; transition-delay: .75s; }
+    .ltr-line { clip-path: inset(-10% 100% -10% 0); }
+    .is-open .ltr-line { animation: ltr-write var(--dur, 1.4s) cubic-bezier(.45,.05,.55,.95) var(--delay, 1s) forwards; }
+    .ltr-para { clip-path: inset(-10% -2% 100% 0); }
+    .is-open .ltr-para { animation-name: ltr-write-p; animation-timing-function: linear; }
+    @keyframes ltr-write-p { from { clip-path: inset(-10% -2% 100% 0); } to { clip-path: inset(-10% -2% -10% 0); } }
+    .is-skip .ltr-line { animation-duration: .01s !important; animation-delay: 0s !important; }
+    .ltr-skip { opacity: 0; transform: translate(-50%, 12px); transition: opacity .35s ease, transform .35s ease, background .2s ease; }
+    .is-open .ltr-skip { opacity: 1; transform: translate(-50%, 0); transition-delay: 1s; }
+    .is-open.is-skip .ltr-skip, .is-open.is-done .ltr-skip { opacity: 0; transform: translate(-50%, 12px); pointer-events: none; transition-delay: 0s; }
+    @media (max-width: 640px) { .ltr-badge { width: 80px !important; height: 80px !important; right: 14px !important; bottom: 14px !important; } .ltr-tip { display: none !important; } .ltr-card { padding: 40px 24px 80px !important; } }
+    @media (prefers-reduced-motion: reduce) { .ltr-ring, .ltr-env, .ltr-ping { animation: none; } .is-open .ltr-line { animation-duration: .01s; animation-delay: 0s; } }
+  </style>
+  <script src="./image-slot.js"></script>
+  <script src="./opt/net-status.js"></script>
+  <style>@media (max-width:640px){[data-nav-links]{display:none!important}[data-nav-burger]{display:inline-flex!important}[data-nav-pill]{width:100%!important;justify-content:space-between!important;flex-wrap:nowrap!important}}@media (min-width:641px){[data-nav-menu]{display:none!important}}</style>
+  <script src="skeleton.js"></script>
+<style>@media (max-width:640px){
+[data-nda-art],[data-hide-mobile]{display:none!important}
+[data-nda-body]{padding:60px 22px 26px!important}
+[data-nda-ctas]{flex-direction:column!important;width:100%!important}
+[data-nda-ctas]>*{width:100%!important;justify-content:center!important}
+[data-ltr-root]{padding:76px 12px 20px!important}
+.ltr-close{top:16px!important;right:16px!important;width:44px!important;height:44px!important}
+.ltr-scroll{padding:40px 24px 84px!important;max-height:calc(100vh - 100px)!important}
+.ltr-para{text-align:left!important;-webkit-hyphens:manual!important;hyphens:manual!important}
+[data-btd-grid]{grid-template-columns:1fr!important}
+[data-btd-title]{border-bottom:0!important;padding:24px 0 10px!important;gap:14px!important}
+[data-btd-body]{padding:0 0 24px!important}
+[data-rs-front]{width:min(360px,92%)!important}
+.rs-stage{min-height:0!important;padding:24px 0 8px}
+[data-rs-tilt]{transform:rotateZ(2deg)!important;box-shadow:0 0 28px rgba(246,124,41,0.35),0 24px 48px rgba(0,0,0,0.5)!important}
+}</style>
+<script src="opt/mail-picker.js" defer></script>
+<style>@media (max-width:640px){[data-nav-id]{display:flex!important}}</style>
+<style data-overscroll-fix="1">html,body{background:#171717;overscroll-behavior-y:none}</style>
+</helmet>
+<div style="position:relative;background:#171717;color:#E0DFBF;font-family:Inter,ui-sans-serif,sans-serif">
+
+  <div id="page-loader-bar" style="position:fixed;top:0;left:0;height:3px;width:0;background:#F67C29;z-index:9999;transition:width 0.4s ease;pointer-events:none"></div>
+
+  <div style="position:fixed;top:16px;left:0;right:0;z-index:50;display:flex;flex-direction:column;align-items:center;padding:0 16px">
+    <nav data-nav-pill="1" style="width:fit-content;display:flex;align-items:center;gap:28px;row-gap:8px;flex-wrap:wrap;border-radius:100px;border:1px solid rgba(224,223,191,0.18);backdrop-filter:blur(14px);background:rgba(23,23,23,0.85);padding:8px 12px">
+      <a href="./#top" style="display:flex;align-items:center;gap:10px;text-decoration:none">
+        <img src="opt/web/logo.webp" alt="Surya" width="32" height="32" decoding="async" style="width:32px;height:32px;border-radius:50%;display:block" /><span data-nav-id="1" style="display:none;flex-direction:column;line-height:1.15;min-width:0"><span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:15px;color:#F5F4E8;white-space:nowrap">Surya D</span><span style="font-family:Inter;font-weight:500;font-size:11.5px;color:#A8A8A8;white-space:nowrap">Lead Product Designer</span></span>
+      </a>
+      <div data-nav-links="1" style="display:flex;align-items:center;gap:clamp(14px,3vw,24px);flex-wrap:wrap;padding-right:4px">
+        <a href="./#work" style="font-family:Inter;font-weight:500;font-size:14px;color:#E0DFBF;text-decoration:none" style-hover="color:#F67C29">Work</a>
+        <a href="About.dc.html" style="font-family:Inter;font-weight:500;font-size:14px;color:#E0DFBF;text-decoration:none" style-hover="color:#F67C29">About me</a>
+        <a href="Resume.dc.html" style="font-family:Inter;font-weight:500;font-size:14px;color:#E0DFBF;text-decoration:none" style-hover="color:#F67C29">Contact</a>
+        <a href="opt/SuryaD_LeadProductDesigner_Resume.pdf" download="SuryaD_LeadProductDesigner_Resume.pdf" style="display:inline-flex;align-items:center;gap:6px;background:#F67C29;color:#171717;font-family:Inter;font-weight:600;font-size:13px;letter-spacing:0.02em;padding:9px 18px;border-radius:100px;text-decoration:none" style-hover="background:#FFA35C;transform:translateY(-2px);box-shadow:0 10px 26px rgba(246,124,41,0.35)">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#171717" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M6 11l6 6 6-6"/><path d="M5 21h14"/></svg>
+          Resume
+        </a>
+      </div>
+      <button data-nav-burger="1" type="button" onClick="{{ toggleNav }}" aria-label="Toggle menu" style="display:none;align-items:center;justify-content:center;width:40px;height:40px;flex-shrink:0;border-radius:50%;border:1px solid rgba(224,223,191,0.25);background:transparent;color:#E0DFBF;cursor:pointer;padding:0">
+        <sc-if value="{{ navOpen }}" hint-placeholder-val="{{ false }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12"></path><path d="M18 6L6 18"></path></svg></sc-if>
+        <sc-if value="{{ navClosed }}" hint-placeholder-val="{{ true }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16"></path><path d="M4 12h16"></path><path d="M4 17h16"></path></svg></sc-if>
+      </button>
+    </nav>
+    <sc-if value="{{ navOpen }}" hint-placeholder-val="{{ false }}">
+      <div data-nav-menu="1" style="margin-top:8px;width:100%;box-sizing:border-box;border-radius:24px;border:1px solid rgba(224,223,191,0.18);background:rgba(23,23,23,0.96);backdrop-filter:blur(14px);padding:10px;display:flex;flex-direction:column;gap:2px;box-shadow:0 20px 50px rgba(0,0,0,0.5)">
+        <a href="./#work" onClick="{{ closeNav }}" style="display:block;font-family:Inter;font-weight:500;font-size:16px;color:#E0DFBF;text-decoration:none;padding:14px 16px;border-radius:14px" style-hover="background:rgba(224,223,191,0.06)">Work</a>
+        <a href="About.dc.html" onClick="{{ closeNav }}" style="display:block;font-family:Inter;font-weight:500;font-size:16px;color:#E0DFBF;text-decoration:none;padding:14px 16px;border-radius:14px" style-hover="background:rgba(224,223,191,0.06)">About me</a>
+        <a href="Resume.dc.html" onClick="{{ closeNav }}" style="display:block;font-family:Inter;font-weight:500;font-size:16px;color:#E0DFBF;text-decoration:none;padding:14px 16px;border-radius:14px" style-hover="background:rgba(224,223,191,0.06)">Contact</a>
+        <a href="opt/SuryaD_LeadProductDesigner_Resume.pdf" download="SuryaD_LeadProductDesigner_Resume.pdf" onClick="{{ closeNav }}" style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:8px;background:#F67C29;color:#171717;font-family:Inter;font-weight:600;font-size:15px;padding:14px 18px;border-radius:100px;text-decoration:none"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#171717" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"></path><path d="M6 11l6 6 6-6"></path><path d="M5 21h14"></path></svg>Resume</a>
+      </div>
+    </sc-if>
+  </div>
+
+  <section style="position:relative;background:#120A06;overflow:hidden;min-height:clamp(600px,88vh,840px);display:flex;align-items:center">
+    <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;background:radial-gradient(60% 50% at 0% 0%, rgba(246,124,41,0.16) 0%, rgba(246,124,41,0) 70%)"></div>
+    <div aria-hidden="true" class="rs-glow" style="position:absolute;inset:0;pointer-events:none;background:radial-gradient(38% 46% at 70% 62%, rgba(246,124,41,0.34) 0%, rgba(246,124,41,0.12) 45%, rgba(246,124,41,0) 75%)"></div>
+    <div aria-hidden="true" style="position:absolute;left:30%;right:-10%;bottom:-38%;height:62%;pointer-events:none;border-radius:50%;background:radial-gradient(closest-side, #0B0604 70%, rgba(11,6,4,0) 100%);box-shadow:0 -2px 60px rgba(246,124,41,0.28)"></div>
+    <div aria-hidden="true" style="position:absolute;left:30%;right:-10%;bottom:-38%;height:62%;pointer-events:none;border-radius:50%;border-top:1.5px solid rgba(246,124,41,0.55);filter:blur(1.5px);-webkit-mask-image:linear-gradient(90deg, transparent 0%, #000 30%, #000 70%, transparent 100%);mask-image:linear-gradient(90deg, transparent 0%, #000 30%, #000 70%, transparent 100%)"></div>
+    <svg aria-hidden="true" viewBox="0 0 1440 800" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none">
+      <path d="M-40 520 C 260 380, 520 470, 760 430" stroke="rgba(246,124,41,0.28)" stroke-width="1.2" fill="none"></path>
+      <path d="M-40 560 C 300 450, 560 520, 820 480" stroke="rgba(246,124,41,0.14)" stroke-width="1" fill="none"></path>
+    </svg>
+    <div aria-hidden="true" style="position:absolute;left:0;right:0;bottom:0;height:140px;pointer-events:none;background:linear-gradient(180deg, rgba(23,23,23,0) 0%, rgba(23,23,23,0.7) 60%, #171717 100%)"></div>
+
+    <div style="position:relative;z-index:2;width:100%;max-width:1200px;margin:0 auto;padding:140px clamp(24px,6vw,72px) clamp(64px,8vw,96px);display:flex;flex-wrap:wrap;gap:48px;align-items:center">
+      <div style="flex:1 1 420px;min-width:0;max-width:520px">
+        <div class="reveal" style="font-family:Inter;font-weight:500;font-size:13px;letter-spacing:0.3em;text-transform:uppercase;color:#A8A8A8;margin-bottom:20px">Resume</div>
+        <h1 class="reveal" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(2.6rem,5.6vw,4.5rem);line-height:1.04;letter-spacing:-0.025em;color:#F5F4E8;margin:0 0 22px">A closer look<br>at <span style="color:#F67C29">my journey</span></h1>
+        <p class="reveal" style="font-family:Inter;font-size:clamp(1rem,1.35vw,1.15rem);line-height:1.65;color:#D6CEC5;max-width:440px;margin:0 0 34px;text-wrap:pretty">Okay, let’s keep it formal for recruiters, hiring managers, and decision-makers who prefer the short version.</p>
+        <div class="reveal" style="display:flex;flex-wrap:wrap;gap:14px;margin-bottom:44px">
+          <a href="opt/SuryaD_LeadProductDesigner_Resume.pdf" download="SuryaD_LeadProductDesigner_Resume.pdf" style="display:inline-flex;align-items:center;gap:10px;background:#F67C29;color:#1A0E06;font-family:Inter;font-weight:600;font-size:16px;padding:16px 32px;border-radius:100px;text-decoration:none;box-shadow:0 10px 30px rgba(246,124,41,0.28)" style-hover="background:#FF8F42;transform:translateY(-2px)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"></path><path d="M6 11l6 6 6-6"></path><path d="M5 21h14"></path></svg>
+            Download
+          </a>
+          <a href="tel:+919787748686" onClick="{{ openCall }}" style="display:inline-flex;align-items:center;gap:10px;background:rgba(18,10,6,0.35);border:1px solid rgba(245,244,232,0.22);color:#F5F4E8;font-family:Inter;font-weight:600;font-size:16px;padding:15px 28px;border-radius:100px;text-decoration:none;white-space:nowrap" style-hover="background:rgba(245,244,232,0.08);transform:translateY(-2px)">
+            Call now
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="rs-stage" style="flex:1 1 520px;min-width:300px;position:relative;min-height:600px;display:flex;align-items:center;justify-content:center;perspective:1400px">
+        <div class="rs-note" aria-hidden="true" style="position:absolute;left:-4%;top:2%;font-family:'Caveat',cursive;font-weight:500;font-size:24px;line-height:1.15;color:rgba(214,206,197,0.4);transform:rotate(-14deg)">Designing<br>better experiences<br>— always</div>
+        <div class="rs-note" aria-hidden="true" style="position:absolute;right:-6%;top:-2%;display:flex;align-items:flex-start;gap:6px;transform:rotate(-6deg)">
+          <svg width="54" height="40" viewBox="0 0 54 40" fill="none" stroke="#F67C29" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="margin-top:14px"><path d="M50 6 C 30 2, 12 12, 6 34"></path><path d="M2 26 L6 35 L13 29"></path></svg>
+          <div style="font-family:'Caveat',cursive;font-weight:600;font-size:26px;line-height:1.1;color:#F67C29">Same resume.<br>Different perspective.</div>
+        </div>
+
+        <div class="rs-back" aria-hidden="true" style="position:absolute;left:-6%;top:52%;width:250px;height:380px;margin-top:-190px;transform-style:preserve-3d">
+          <div style="width:100%;height:100%;border-radius:18px;background:linear-gradient(160deg,#2A2320 0%,#15100D 100%);border:1px solid rgba(246,124,41,0.35);box-shadow:0 0 0 1px rgba(0,0,0,0.4), 0 30px 60px rgba(0,0,0,0.6), -6px 0 30px rgba(246,124,41,0.18);padding:30px 24px;transform:rotateY(28deg) rotateZ(-3deg);transform-origin:right center">
+            <div style="font-family:Inter;font-weight:600;font-size:15px;color:#F5F4E8;margin-bottom:26px">Work Experience</div>
+            <div style="position:relative;padding-left:20px;display:flex;flex-direction:column;gap:30px">
+              <span style="position:absolute;left:4px;top:6px;bottom:6px;width:2px;background:linear-gradient(180deg,#F67C29,rgba(246,124,41,0.25))"></span>
+              <div style="position:relative"><span style="position:absolute;left:-20px;top:4px;width:10px;height:10px;border-radius:50%;background:#F67C29;box-shadow:0 0 10px #F67C29"></span><div style="width:96px;height:10px;border-radius:4px;background:#F67C29;opacity:0.85;margin-bottom:12px"></div><div style="margin-bottom:8px;height:6px;border-radius:4px;background:rgba(245,244,232,0.08);overflow:hidden"><div style="height:100%;width:80%;background:rgba(245,244,232,0.18);border-radius:4px"></div></div><div style="margin-bottom:8px;height:6px;border-radius:4px;background:rgba(245,244,232,0.08);overflow:hidden"><div style="height:100%;width:60%;background:rgba(245,244,232,0.12);border-radius:4px"></div></div></div>
+              <div style="position:relative"><span style="position:absolute;left:-20px;top:4px;width:10px;height:10px;border-radius:50%;background:#7A3A14"></span><div style="width:84px;height:10px;border-radius:4px;background:rgba(168,154,142,0.45);margin-bottom:12px"></div><div style="margin-bottom:8px;height:6px;border-radius:4px;background:rgba(245,244,232,0.08);overflow:hidden"><div style="height:100%;width:70%;background:rgba(245,244,232,0.12);border-radius:4px"></div></div><div style="margin-bottom:8px;height:6px;border-radius:4px;background:rgba(245,244,232,0.08);overflow:hidden"><div style="height:100%;width:50%;background:rgba(245,244,232,0.08);border-radius:4px"></div></div></div>
+              <div style="position:relative"><span style="position:absolute;left:-20px;top:4px;width:10px;height:10px;border-radius:50%;background:#7A3A14"></span><div style="width:72px;height:10px;border-radius:4px;background:rgba(168,154,142,0.45);margin-bottom:12px"></div><div style="margin-bottom:8px;height:6px;border-radius:4px;background:rgba(245,244,232,0.08);overflow:hidden"><div style="height:100%;width:65%;background:rgba(245,244,232,0.12);border-radius:4px"></div></div><div style="margin-bottom:8px;height:6px;border-radius:4px;background:rgba(245,244,232,0.08);overflow:hidden"><div style="height:100%;width:45%;background:rgba(245,244,232,0.08);border-radius:4px"></div></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rs-back rs-r" aria-hidden="true" style="position:absolute;right:-8%;top:54%;width:230px;height:360px;margin-top:-170px;transform-style:preserve-3d">
+          <div style="width:100%;height:100%;border-radius:18px;background:linear-gradient(200deg,#2A2320 0%,#15100D 100%);border:1px solid rgba(246,124,41,0.35);box-shadow:0 0 0 1px rgba(0,0,0,0.4), 0 30px 60px rgba(0,0,0,0.6), 6px 0 30px rgba(246,124,41,0.18);padding:30px 24px 24px 60px;transform:rotateY(-30deg) rotateZ(3deg);transform-origin:left center">
+            <div style="font-family:Inter;font-weight:600;font-size:15px;color:#F5F4E8;margin-bottom:24px">Skills &amp; Tools</div>
+            <div style="display:flex;flex-direction:column;gap:18px">
+              <div><div style="font-family:Inter;font-size:11px;color:#A89A8E;margin-bottom:7px">User Research</div><div style="height:6px;border-radius:4px;background:rgba(245,244,232,0.08);overflow:hidden"><div style="height:100%;width:82%;background:#F67C29;border-radius:4px"></div></div></div>
+              <div><div style="font-family:Inter;font-size:11px;color:#A89A8E;margin-bottom:7px">Wireframing</div><div style="height:6px;border-radius:4px;background:rgba(245,244,232,0.08);overflow:hidden"><div style="height:100%;width:74%;background:#F67C29;border-radius:4px"></div></div></div>
+              <div><div style="font-family:Inter;font-size:11px;color:#A89A8E;margin-bottom:7px">Prototyping</div><div style="height:6px;border-radius:4px;background:rgba(245,244,232,0.08);overflow:hidden"><div style="height:100%;width:66%;background:#F67C29;border-radius:4px"></div></div></div>
+              <div><div style="font-family:Inter;font-size:11px;color:#A89A8E;margin-bottom:7px">Visual Design</div><div style="height:6px;border-radius:4px;background:rgba(245,244,232,0.08);overflow:hidden"><div style="height:100%;width:88%;background:#F67C29;border-radius:4px"></div></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rs-front" data-rs-front="1" style="position:relative;z-index:2;width:min(340px,70%)">
+          <div data-rs-tilt="1" style="transform:rotateY(-10deg) rotateZ(4deg);transform-style:preserve-3d;border-radius:18px;padding:6px;background:linear-gradient(135deg,#FFB27A 0%,#F67C29 35%,rgba(246,124,41,0.25) 100%);box-shadow:0 0 40px rgba(246,124,41,0.45), 0 0 120px rgba(246,124,41,0.25), 0 40px 80px rgba(0,0,0,0.6)">
+            <div style="border-radius:14px;overflow:hidden;-webkit-mask-image:-webkit-radial-gradient(white,black);isolation:isolate">
+              <img class="reveal-img" src="opt/web/resume-page-hd.webp" alt="Surya D resume preview" decoding="async" style="width:100%;aspect-ratio:1/1.41;display:block;object-fit:cover;object-position:top center;background:#FFFFFF;border-radius:14px;backface-visibility:hidden;transform:translateZ(0)">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" style="position:relative;background:#171717;overflow:hidden;padding:0">
+    <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;background:radial-gradient(50% 40% at 50% 100%, rgba(246,124,41,0.22) 0%, rgba(246,124,41,0) 70%)"></div>
+    <div style="position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:0 clamp(24px,6vw,72px)">
+      <div aria-hidden="true" style="height:1px;background:linear-gradient(90deg, rgba(245,244,232,0) 0%, rgba(245,244,232,0.12) 20%, rgba(245,244,232,0.12) 80%, rgba(245,244,232,0) 100%);margin-bottom:clamp(64px,8vw,96px)"></div>
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:32px">
+        <div style="flex:1 1 520px;min-width:0;max-width:680px">
+          <div class="reveal" style="font-family:Inter;font-weight:500;font-size:13px;letter-spacing:0.3em;text-transform:uppercase;color:#A8A8A8;margin-bottom:22px">Let's connect</div>
+          <h2 class="reveal" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(2.25rem,5.5vw,3.75rem);line-height:1.08;letter-spacing:-0.025em;color:#F5F4E8;margin:0 0 26px">Interested in<br><span style="color:#F67C29">working together?</span></h2>
+          <p class="reveal" style="font-family:Inter;font-size:clamp(1rem,1.35vw,1.15rem);line-height:1.65;color:#D6CEC5;max-width:560px;margin:0;text-wrap:pretty">If something here made you curious, I’d love to hear from you. A call, a coffee, or just a hello.</p>
+        </div>
+        <div class="reveal rs-note" aria-hidden="true" style="flex:0 0 auto;display:flex;flex-direction:column;align-items:flex-start;gap:4px;padding-bottom:8px">
+          <div style="font-family:'Caveat',cursive;font-weight:600;font-size:clamp(24px,2.4vw,30px);line-height:1.1;color:#F67C29;transform:rotate(-10deg);margin-left:28px">Let's build<br>something great<br>together.</div>
+          <svg width="40" height="90" viewBox="0 0 40 90" fill="none" stroke="#F67C29" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M34 4 C 10 18, 6 50, 18 84"></path><path d="M11 76 L18 85 L24 76"></path></svg>
+        </div>
+      </div>
+
+      <div class="reveal" style="margin-top:clamp(40px,5vw,56px);display:flex;flex-wrap:wrap;border:1px solid rgba(246,124,41,0.22);border-radius:20px;background:linear-gradient(180deg, rgba(42,22,8,0.55) 0%, rgba(26,14,6,0.7) 100%);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);box-shadow:0 30px 60px rgba(0,0,0,0.35)">
+          <div style="flex:1 1 220px;min-width:0;display:flex;flex-direction:column;gap:14px;padding:clamp(28px,3.5vw,44px) clamp(24px,3.5vw,44px)">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#F67C29" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 7l9 6 9-6"></path></svg>
+            <div style="font-family:Inter;font-weight:500;font-size:12px;letter-spacing:0.22em;text-transform:uppercase;color:#A89A8E;margin-top:14px">Email</div>
+            <a href="mailto:ssdecides@gmail.com?subject=Hello%20Surya%20%E2%80%94%20from%20your%20portfolio&amp;body=Hi%20Surya%2C%0A%0A" style="font-family:Inter;font-weight:500;font-size:clamp(16px,1.4vw,18px);color:#F5F4E8;text-decoration:none;border-bottom:1px solid rgba(245,244,232,0.4);width:fit-content;padding-bottom:2px" style-hover="color:#F67C29;border-color:#F67C29">ssdecides@gmail.com</a>
+          </div>
+          <div aria-hidden="true" style="width:1px;align-self:stretch;margin:32px 0;background:rgba(245,244,232,0.1)"></div>
+          <div style="flex:1 1 220px;min-width:0;display:flex;flex-direction:column;gap:14px;padding:clamp(28px,3.5vw,44px) clamp(24px,3.5vw,44px)">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#F67C29" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg>
+            <div style="font-family:Inter;font-weight:500;font-size:12px;letter-spacing:0.22em;text-transform:uppercase;color:#A89A8E;margin-top:14px">Phone</div>
+            <a href="tel:+919787748686" style="font-family:Inter;font-weight:500;font-size:clamp(16px,1.4vw,18px);color:#F5F4E8;text-decoration:none;width:fit-content" style-hover="color:#F67C29">+91 97877 48686</a>
+          </div>
+          <div aria-hidden="true" style="width:1px;align-self:stretch;margin:32px 0;background:rgba(245,244,232,0.1)"></div>
+          <div style="flex:1 1 220px;min-width:0;display:flex;flex-direction:column;gap:14px;padding:clamp(28px,3.5vw,44px) clamp(24px,3.5vw,44px)">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#F67C29" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"></path><circle cx="12" cy="9.5" r="2.5"></circle></svg>
+            <div style="font-family:Inter;font-weight:500;font-size:12px;letter-spacing:0.22em;text-transform:uppercase;color:#A89A8E;margin-top:14px">Location</div>
+            <div style="font-family:Inter;font-weight:500;font-size:clamp(16px,1.4vw,18px);color:#F5F4E8">Coimbatore, Tamil Nadu, India</div>
+          </div>
+      </div>
+    </div>
+    <div aria-hidden="true" style="position:relative;z-index:1;margin:-40px calc(-1 * clamp(24px,6vw,72px)) 0;height:clamp(200px,24vw,340px);background:url('opt/web/contact-terrain.webp') center top / cover no-repeat;-webkit-mask-image:linear-gradient(180deg, transparent 0%, #000 22%);mask-image:linear-gradient(180deg, transparent 0%, #000 22%)"></div>
+    <div style="position:absolute;left:0;right:0;bottom:18px;z-index:2;text-align:center;font-family:Inter;font-size:13px;color:rgba(245,244,232,0.55)">© 2026 Surya D. — Product Designer</div>
+  </section>
+
+  <button type="button" class="{{ letterBadgeClass }}" onClick="{{ openLetter }}" aria-label="Read my letter" style="position:fixed;right:22px;bottom:22px;z-index:60;width:96px;height:96px;border-radius:50%;background:#171717;border:1px solid rgba(224,223,191,0.16);box-shadow:0 14px 34px rgba(0,0,0,0.45);padding:0;cursor:pointer;display:flex;align-items:center;justify-content:center">
+    <svg class="ltr-ring" viewBox="0 0 124 124" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;overflow:visible">
+      <defs><path id="ltr-circle" d="M62,62 m-47,0 a47,47 0 1,1 94,0 a47,47 0 1,1 -94,0"></path></defs>
+      <text style="font-family:Inter,sans-serif;font-weight:700;font-size:10px;letter-spacing:2.4px;fill:#F5F4E8"><textPath href="#ltr-circle" textLength="292" lengthAdjust="spacing">READ MY LETTER ✦ READ MY LETTER ✦</textPath></text>
+    </svg>
+    <span class="ltr-env" aria-hidden="true" style="position:relative;display:block;width:36px;height:26px;border-radius:5px;background:#F67C29;box-shadow:0 6px 14px rgba(246,124,41,0.35)">
+      <svg viewBox="0 0 48 34" style="position:absolute;inset:0;width:100%;height:100%"><path d="M3 30 L19 17 M45 30 L29 17" stroke="#C85A14" stroke-width="1.4" fill="none" stroke-linecap="round"></path></svg>
+      <svg class="ltr-flap" viewBox="0 0 48 20" style="position:absolute;left:0;top:0;width:100%;height:15px;overflow:visible"><path d="M1.5 2 L24 19 L46.5 2" fill="#FF9148" stroke="#C85A14" stroke-width="1.4" stroke-linejoin="round"></path></svg>
+      <span style="position:absolute;left:50%;top:10px;transform:translateX(-50%);width:13px;height:13px;border-radius:50%;background:#7A2E0E;box-shadow:0 1px 0 rgba(255,255,255,0.25) inset;display:flex;align-items:center;justify-content:center;font-family:'Caveat',cursive;font-weight:700;font-size:11px;line-height:1;color:#FFE9D6">S</span>
+    </span>
+    <sc-if value="{{ letterUnread }}" hint-placeholder-val="{{ true }}">
+      <span aria-hidden="true" style="position:absolute;top:0;left:0;width:22px;height:22px">
+        <span class="ltr-ping" style="position:absolute;inset:0;border-radius:50%;background:#F67C29"></span>
+        <span style="position:absolute;inset:0;border-radius:50%;background:#F67C29;border:2px solid #171717;display:flex;align-items:center;justify-content:center;font-family:Inter;font-weight:700;font-size:11px;color:#171717">1</span>
+      </span>
+    </sc-if>
+    <span class="ltr-tip" style="position:absolute;right:calc(100% + 14px);top:50%;white-space:nowrap;background:#FFFCF4;color:#2A1A10;font-family:'Caveat',cursive;font-weight:600;font-size:21px;line-height:1;padding:8px 14px 9px;border-radius:12px;box-shadow:0 10px 24px rgba(0,0,0,0.35)">psst… I wrote you something</span>
+  </button>
+
+  <div class="{{ letterRootClass }}" data-ltr-root="1" role="dialog" aria-modal="true" aria-label="A letter from Surya" style="position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:40px 16px">
+    <div class="ltr-backdrop" onClick="{{ closeLetter }}" style="position:absolute;inset:0;background:rgba(12,7,4,0.6);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)"></div>
+    <button type="button" class="ltr-close" onClick="{{ closeLetter }}" aria-label="Close letter" style="position:fixed;top:24px;right:24px;z-index:3;width:52px;height:52px;border-radius:50%;background:rgba(23,23,23,0.75);border:1px solid rgba(245,244,232,0.2);color:#F5F4E8;cursor:pointer;display:flex;align-items:center;justify-content:center">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+    </button>
+    <div class="ltr-card" style="position:relative;z-index:2;width:100%;max-width:760px">
+      <div class="ltr-tape" aria-hidden="true" style="position:absolute;top:-14px;left:50%;z-index:2;width:150px;height:40px;background:rgba(246,170,130,0.72);box-shadow:0 2px 6px rgba(0,0,0,0.08)"></div>
+      <div class="ltr-scroll" ref="{{ letterScrollRef }}" style="max-height:calc(100vh - 80px);overflow-y:auto;background:#FFFCF4;border-radius:14px;box-shadow:0 40px 80px rgba(0,0,0,0.5);padding:64px 64px 96px;font-family:'Caveat',cursive;color:#2A1A10">
+        <div class="ltr-photo">
+          <image-slot id="letter-photo" shape="rounded" radius="6" placeholder="Drop an illustration for your letter" style="width:100%;aspect-ratio:16/7.2;display:block"></image-slot>
+        </div>
+        <div class="ltr-meta" style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;margin:36px 0 22px">
+          <span style="font-weight:700;font-size:26px;color:#E0661A">A little note</span>
+          <span style="font-weight:500;font-size:22px;color:#6B5647">{{ letterDate }}</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:4px;font-weight:500;font-size:clamp(20px,2.4vw,26px);line-height:1.45">
+          <div class="ltr-line" style="--delay:1s;--dur:1.1s;margin-bottom:10px;width:fit-content;padding-right:12px"><img loading="lazy" src="opt/web/hi-there.webp" alt="Hi there!" decoding="async" style="width:clamp(170px,22vw,250px);height:auto;display:block;margin-left:calc(clamp(170px,22vw,250px) * -0.085);margin-top:calc(clamp(170px,22vw,250px) * -0.04);margin-bottom:calc(clamp(170px,22vw,250px) * -0.05);filter:brightness(0);opacity:0.88"></div>
+          <div class="ltr-line ltr-para" style="--delay:2.2s;--dur:2.9s;width:100%;text-align:justify;text-justify:inter-word;hyphens:auto;-webkit-hyphens:auto;text-wrap:pretty">Thanks for stopping by. I know you probably have a dozen tabs open, so this means a lot.</div>
+          <div class="ltr-line ltr-para" style="--delay:5.3s;--dur:6.3s;margin-top:18px;width:100%;text-align:justify;text-justify:inter-word;hyphens:auto;-webkit-hyphens:auto;text-wrap:pretty">For the last 5+ years I've designed products for people who don't have time to figure things out: delivery partners, operators and busy teams. Making the complicated feel obvious is what keeps me going.</div>
+          <div class="ltr-line ltr-para" style="--delay:11.9s;--dur:3s;margin-top:18px;width:100%;text-align:justify;text-justify:inter-word;hyphens:auto;-webkit-hyphens:auto;text-wrap:pretty">If something here made you curious, I'd love to hear from you. A call, a coffee, or just a hello.</div>
+          <div class="ltr-line" style="--delay:15s;--dur:1s;margin-top:18px;width:fit-content;padding-right:12px">Ring me on <a href="tel:+919787748686" style="color:#E0661A;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px">+91 97877 48686</a></div>
+          <div class="ltr-line" style="--delay:16.2s;--dur:.8s;margin-top:28px;width:fit-content;padding-right:8px">Warmly,</div>
+          <div class="ltr-line" style="--delay:17.1s;--dur:1.2s;width:fit-content;padding:6px 16px 0 0"><img loading="lazy" src="opt/web/signature.webp" alt="Surya" decoding="async" style="width:clamp(130px,16vw,180px);height:auto;display:block;margin-left:calc(clamp(130px,16vw,180px) * -0.14);margin-top:calc(clamp(130px,16vw,180px) * -0.03);filter:brightness(0);opacity:0.88"></div>
+        </div>
+      </div>
+      <button type="button" class="ltr-skip" onClick="{{ skipLetter }}" style="position:absolute;left:50%;bottom:-22px;z-index:3;display:inline-flex;align-items:center;gap:6px;background:#171717;color:#F5F4E8;border:1px solid rgba(245,244,232,0.12);font-family:Inter;font-weight:600;font-size:15px;padding:14px 24px;border-radius:100px;cursor:pointer;box-shadow:0 10px 24px rgba(0,0,0,0.35)" style-hover="background:#2A1A10">Skip to the end ↓</button>
+    </div>
+  </div>
+
+  <sc-if value="{{ callOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeCall }}" role="dialog" aria-modal="true" aria-label="Call Surya" style="position:fixed;inset:0;z-index:200;background:rgba(10,8,6,0.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:20px">
+      <div onClick="{{ stopProp }}" style="position:relative;width:100%;max-width:400px;background:#1F1F1F;border:1px solid rgba(245,244,232,0.12);border-radius:24px;padding:36px 28px 28px;box-shadow:0 24px 60px rgba(0,0,0,0.5);display:flex;flex-direction:column;align-items:center;gap:20px;text-align:center">
+        <button type="button" onClick="{{ closeCall }}" aria-label="Close" style="position:absolute;top:14px;right:14px;width:40px;height:40px;border-radius:100px;border:none;background:rgba(245,244,232,0.06);color:#E0DFBF;cursor:pointer;display:flex;align-items:center;justify-content:center" style-hover="background:rgba(245,244,232,0.14)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+        <div style="font-family:Inter;font-weight:600;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:#9A9985">Give me a ring</div>
+        <a href="tel:+919787748686" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:clamp(1.7rem,6vw,2.1rem);letter-spacing:-0.01em;color:#F5F4E8;text-decoration:none;white-space:nowrap" style-hover="color:#F67C29">+91 97877 48686</a>
+        <div style="display:flex;gap:10px;width:100%;flex-wrap:wrap">
+          <a href="tel:+919787748686" style="flex:1 1 140px;display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#F67C29;color:#1A0E06;font-family:Inter;font-weight:600;font-size:15px;padding:14px 20px;border-radius:100px;text-decoration:none" style-hover="background:#FF8C3D">Call</a>
+          <button type="button" onClick="{{ copyNumber }}" style="flex:1 1 140px;display:inline-flex;align-items:center;justify-content:center;gap:8px;background:transparent;color:#F5F4E8;border:1px solid rgba(245,244,232,0.22);font-family:Inter;font-weight:600;font-size:15px;padding:14px 20px;border-radius:100px;cursor:pointer" style-hover="background:rgba(245,244,232,0.08)">{{ copyLabel }}</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { navOpen: false, letterOpen: false, letterSkip: false, letterDone: false, letterRead: (() => { try { return localStorage.getItem('surya-letter-read') === '1'; } catch (e) { return false; } })() };
+  letterScrollRef = React.createRef();
+  openLetter = () => {
+    clearTimeout(this._ltrTimer);
+    try { localStorage.setItem('surya-letter-read', '1'); } catch (e) {}
+    if (this.letterScrollRef.current) this.letterScrollRef.current.scrollTop = 0;
+    this.setState({ letterOpen: true, letterSkip: false, letterDone: false, letterRead: true });
+    this._ltrTimer = setTimeout(() => this.setState({ letterDone: true }), 18600);
+  };
+  closeLetter = () => { clearTimeout(this._ltrTimer); this.setState({ letterOpen: false }); };
+  skipLetter = () => {
+    clearTimeout(this._ltrTimer);
+    this.setState({ letterSkip: true, letterDone: true });
+    requestAnimationFrame(() => requestAnimationFrame(() => { const el = this.letterScrollRef.current; if (el) el.scrollTop = el.scrollHeight; }));
+  };
+  componentDidMount() {
+    if (!window.__pdfDl) { window.__pdfDl = true; const s = document.createElement('script'); s.src = 'opt/resume-preview.js'; document.head.appendChild(s); }
+    this._ltrKey = (e) => { if (e.key !== 'Escape') return; if (this.state.callOpen) this.closeCall(); else if (this.state.letterOpen) this.closeLetter(); };
+    document.addEventListener('keydown', this._ltrKey);
+    document.addEventListener('click', (e) => {
+      const a = e.target.closest('a');
+      if (!a) return;
+      const href = a.getAttribute('href') || '';
+      if (!href || href.startsWith('#') || /^(tel:|mailto:)/i.test(href) || a.target === '_blank') return;
+      const bar = document.getElementById('page-loader-bar');
+      if (bar) bar.style.width = '80%';
+    }, true);
+    const revealEls = Array.from(document.querySelectorAll(".reveal, .reveal-img"));
+    revealEls.forEach((el, i) => {
+      el.style.transitionDelay = ((i % 6) * 80) + "ms";
+      if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add("is-visible");
+    });
+    this._io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          this._io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: "0px 0px -40px 0px" });
+    revealEls.forEach((el) => this._io.observe(el));
+  }
+  componentWillUnmount() {
+    if (this._io) this._io.disconnect();
+    clearTimeout(this._ltrTimer); document.removeEventListener('keydown', this._ltrKey);
+  }
+  openCall = (e) => { if (e) e.preventDefault(); this.setState({ callOpen: true, copied: false }); };
+  closeCall = () => this.setState({ callOpen: false });
+  stopProp = (e) => e.stopPropagation();
+  copyNumber = () => {
+    const n = '+91 97877 48686';
+    const done = () => { this.setState({ copied: true }); clearTimeout(this._cpT); this._cpT = setTimeout(() => this.setState({ copied: false }), 2000); };
+    try { navigator.clipboard.writeText(n).then(done, () => { this._fallbackCopy(n); done(); }); } catch (e) { this._fallbackCopy(n); done(); }
+  };
+  _fallbackCopy = (n) => { const t = document.createElement('textarea'); t.value = n; document.body.appendChild(t); t.select(); try { document.execCommand('copy'); } catch (e) {} t.remove(); };
+  toggleNav = () => this.setState(s => ({ navOpen: !(s && s.navOpen) }));
+  closeNav = () => this.setState({ navOpen: false });
+  renderVals() {
+    const _nav = !!(this.state && this.state.navOpen);
+    return Object.assign({}, this._baseVals(), { navOpen: _nav, navClosed: !_nav, toggleNav: this.toggleNav, closeNav: this.closeNav,
+      callOpen: !!this.state.callOpen, openCall: this.openCall, closeCall: this.closeCall, stopProp: this.stopProp, copyNumber: this.copyNumber, copyLabel: this.state.copied ? 'Copied ✓' : 'Copy number' });
+  }
+  _baseVals() {
+    const st = this.state;
+    return {
+      openLetter: this.openLetter, closeLetter: this.closeLetter, skipLetter: this.skipLetter, letterScrollRef: this.letterScrollRef,
+      letterUnread: !st.letterRead,
+      letterBadgeClass: 'ltr-badge' + (st.letterRead ? '' : ' is-unread'),
+      letterDate: new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }),
+      letterRootClass: 'ltr-root' + (st.letterOpen ? ' is-open' : '') + (st.letterSkip ? ' is-skip' : '') + (st.letterDone ? ' is-done' : ''),
+    };
+  }
+}
+</script>
+</body>
+</html>

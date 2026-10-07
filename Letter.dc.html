@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Caveat:wght@500;600;700&amp;display=swap" rel="stylesheet">
+  <script src="./image-slot.js"></script>
+  <style>
+    @keyframes ltr-spin { to { transform: rotate(360deg); } }
+    @keyframes ltr-bob { 0%,100% { transform: translateY(0) rotate(-4deg); } 50% { transform: translateY(-4px) rotate(3deg); } }
+    @keyframes ltr-ping { 0% { transform: scale(1); opacity: .7; } 100% { transform: scale(2.3); opacity: 0; } }
+    @keyframes ltr-write { from { clip-path: inset(-10% 100% -10% 0); } to { clip-path: inset(-10% -2% -10% 0); } }
+    @keyframes ltr-tip { from { opacity: 0; transform: translate(8px,-50%) scale(.9); } to { opacity: 1; transform: translate(0,-50%) scale(1); } }
+    .ltr-badge { transition: transform .35s cubic-bezier(.2,1.3,.4,1), box-shadow .35s ease; }
+    .ltr-badge:hover { transform: scale(1.06); box-shadow: 0 18px 40px rgba(0,0,0,0.5), 0 0 0 6px rgba(246,124,41,0.12); }
+    .ltr-ring { animation: ltr-spin 14s linear infinite; transform-origin: 50% 50%; }
+    .ltr-badge:hover .ltr-ring { animation-duration: 5s; }
+    .ltr-env { animation: ltr-bob 3.2s ease-in-out infinite; }
+    .ltr-flap { transform-origin: 50% 0; transition: transform .45s cubic-bezier(.2,1.2,.4,1); }
+    .ltr-badge:hover .ltr-flap { transform: perspective(80px) rotateX(165deg); }
+    .ltr-ping { animation: ltr-ping 1.8s ease-out infinite; }
+    @keyframes ltr-tip-out { to { opacity: 0; transform: translate(8px,-50%) scale(.9); } }
+    .ltr-tip { opacity: 0; transform: translate(8px,-50%) scale(.92); transform-origin: right center; transition: opacity .3s ease, transform .4s cubic-bezier(.2,1.3,.4,1); pointer-events: none; }
+    .ltr-badge.is-unread .ltr-tip { animation: ltr-tip .55s cubic-bezier(.2,1.3,.4,1) 2.5s forwards, ltr-tip-out .4s ease 9s forwards; }
+    .ltr-badge:hover .ltr-tip, .ltr-badge:focus-visible .ltr-tip { animation: none; opacity: 1; transform: translate(0,-50%) scale(1); }
+    .ltr-root .ltr-scroll { scroll-behavior: smooth; }
+    .ltr-root { visibility: hidden; pointer-events: none; transition: visibility 0s linear .5s; }
+    .ltr-root.is-open { visibility: visible; pointer-events: auto; transition-delay: 0s; }
+    .ltr-backdrop { opacity: 0; transition: opacity .45s ease; }
+    .is-open .ltr-backdrop { opacity: 1; }
+    .ltr-card { opacity: 0; transform: translateY(90px) scale(.88) rotate(-3deg); transition: transform .8s cubic-bezier(.2,1.15,.3,1), opacity .35s ease; }
+    .is-open .ltr-card { opacity: 1; transform: none; }
+    .ltr-close { opacity: 0; transform: scale(.6) rotate(-90deg); transition: opacity .4s ease .25s, transform .45s cubic-bezier(.2,1.3,.4,1) .25s, background .2s ease; }
+    .is-open .ltr-close { opacity: 1; transform: none; }
+    .ltr-close:hover { background: rgba(246,124,41,0.9) !important; }
+    .ltr-tape { opacity: 0; transform: translate(-50%,-28px) rotate(-10deg) scale(1.25); transition: opacity .3s ease, transform .5s cubic-bezier(.2,1.4,.4,1); }
+    .is-open .ltr-tape { opacity: 1; transform: translate(-50%,0) rotate(-2deg); transition-delay: .55s; }
+    .ltr-photo { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .7s cubic-bezier(.2,1,.3,1); }
+    .is-open .ltr-photo { opacity: 1; transform: none; transition-delay: .35s; }
+    .ltr-meta { opacity: 0; transition: opacity .5s ease; }
+    .is-open .ltr-meta { opacity: 1; transition-delay: .75s; }
+    .ltr-line { clip-path: inset(-10% 100% -10% 0); }
+    .is-open .ltr-line { animation: ltr-write var(--dur, 1.4s) cubic-bezier(.45,.05,.55,.95) var(--delay, 1s) forwards; }
+    .ltr-para { clip-path: inset(-10% -2% 100% 0); }
+    .is-open .ltr-para { animation-name: ltr-write-p; animation-timing-function: linear; }
+    @keyframes ltr-write-p { from { clip-path: inset(-10% -2% 100% 0); } to { clip-path: inset(-10% -2% -10% 0); } }
+    .is-skip .ltr-line { animation-duration: .01s !important; animation-delay: 0s !important; }
+    .ltr-skip { opacity: 0; transform: translate(-50%, 12px); transition: opacity .35s ease, transform .35s ease, background .2s ease; }
+    .is-open .ltr-skip { opacity: 1; transform: translate(-50%, 0); transition-delay: 1s; }
+    .is-open.is-skip .ltr-skip, .is-open.is-done .ltr-skip { opacity: 0; transform: translate(-50%, 12px); pointer-events: none; transition-delay: 0s; }
+    @media (max-width: 640px) { .ltr-badge { width: 80px !important; height: 80px !important; right: 14px !important; bottom: 14px !important; } .ltr-tip { display: none !important; } .ltr-root { padding: 68px 12px 28px !important; } .ltr-scroll { padding: 36px 22px 72px !important; max-height: calc(100dvh - 104px) !important; border-radius: 12px !important; } .ltr-close { top: 12px !important; right: 12px !important; width: 44px !important; height: 44px !important; } .ltr-tape { width: 110px !important; height: 32px !important; top: -12px !important; } #letter-photo { aspect-ratio: 4/3 !important; } .ltr-meta { margin: 24px 0 14px !important; } .ltr-meta span:first-child { font-size: 22px !important; } .ltr-meta span:last-child { font-size: 18px !important; } .ltr-skip { font-size: 14px !important; padding: 12px 20px !important; bottom: -18px !important; white-space: nowrap; } }
+    @media (prefers-reduced-motion: reduce) { .ltr-ring, .ltr-env, .ltr-ping { animation: none; } .is-open .ltr-line { animation-duration: .01s; animation-delay: 0s; } }
+@media (max-width:640px){
+[data-ltr-root]{padding:76px 12px 20px!important}
+.ltr-close{top:16px!important;right:16px!important;width:44px!important;height:44px!important}
+.ltr-scroll{padding:40px 24px 84px!important;max-height:calc(100vh - 100px)!important}
+.ltr-para{text-align:left!important;-webkit-hyphens:manual!important;hyphens:manual!important}
+.ltr-badge{width:80px!important;height:80px!important;right:14px!important;bottom:14px!important}
+.ltr-tip{display:none!important}
+}
+  </style>
+</helmet>
+<div>
+  <button type="button" class="{{ letterBadgeClass }}" onClick="{{ openLetter }}" aria-label="Read my letter" style="position:fixed;right:22px;bottom:22px;z-index:60;width:96px;height:96px;border-radius:50%;background:#171717;border:1px solid rgba(224,223,191,0.16);box-shadow:0 14px 34px rgba(0,0,0,0.45);padding:0;cursor:pointer;display:flex;align-items:center;justify-content:center">
+    <svg class="ltr-ring" viewBox="0 0 124 124" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;overflow:visible">
+      <defs><path id="ltr-circle" d="M62,62 m-47,0 a47,47 0 1,1 94,0 a47,47 0 1,1 -94,0"></path></defs>
+      <text style="font-family:Inter,sans-serif;font-weight:700;font-size:10px;letter-spacing:2.4px;fill:#F5F4E8"><textPath href="#ltr-circle" textLength="292" lengthAdjust="spacing">READ MY LETTER ✦ READ MY LETTER ✦</textPath></text>
+    </svg>
+    <span class="ltr-env" aria-hidden="true" style="position:relative;display:block;width:36px;height:26px;border-radius:5px;background:#F67C29;box-shadow:0 6px 14px rgba(246,124,41,0.35)">
+      <svg viewBox="0 0 48 34" style="position:absolute;inset:0;width:100%;height:100%"><path d="M3 30 L19 17 M45 30 L29 17" stroke="#C85A14" stroke-width="1.4" fill="none" stroke-linecap="round"></path></svg>
+      <svg class="ltr-flap" viewBox="0 0 48 20" style="position:absolute;left:0;top:0;width:100%;height:15px;overflow:visible"><path d="M1.5 2 L24 19 L46.5 2" fill="#FF9148" stroke="#C85A14" stroke-width="1.4" stroke-linejoin="round"></path></svg>
+      <span style="position:absolute;left:50%;top:10px;transform:translateX(-50%);width:13px;height:13px;border-radius:50%;background:#7A2E0E;box-shadow:0 1px 0 rgba(255,255,255,0.25) inset;display:flex;align-items:center;justify-content:center;font-family:'Caveat',cursive;font-weight:700;font-size:11px;line-height:1;color:#FFE9D6">S</span>
+    </span>
+    <sc-if value="{{ letterUnread }}" hint-placeholder-val="{{ true }}">
+      <span aria-hidden="true" style="position:absolute;top:0;left:0;width:22px;height:22px">
+        <span class="ltr-ping" style="position:absolute;inset:0;border-radius:50%;background:#F67C29"></span>
+        <span style="position:absolute;inset:0;border-radius:50%;background:#F67C29;border:2px solid #171717;display:flex;align-items:center;justify-content:center;font-family:Inter;font-weight:700;font-size:11px;color:#171717">1</span>
+      </span>
+    </sc-if>
+    <span class="ltr-tip" style="position:absolute;right:calc(100% + 14px);top:50%;white-space:nowrap;background:#FFFCF4;color:#2A1A10;font-family:'Caveat',cursive;font-weight:600;font-size:21px;line-height:1;padding:8px 14px 9px;border-radius:12px;box-shadow:0 10px 24px rgba(0,0,0,0.35)">psst… I wrote you something</span>
+  </button>
+
+  <div class="{{ letterRootClass }}" data-ltr-root="1" role="dialog" aria-modal="true" aria-label="A letter from Surya" style="position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:40px 16px">
+    <div class="ltr-backdrop" onClick="{{ closeLetter }}" style="position:absolute;inset:0;background:rgba(12,7,4,0.6);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)"></div>
+    <button type="button" class="ltr-close" onClick="{{ closeLetter }}" aria-label="Close letter" style="position:fixed;top:24px;right:24px;z-index:3;width:52px;height:52px;border-radius:50%;background:rgba(23,23,23,0.75);border:1px solid rgba(245,244,232,0.2);color:#F5F4E8;cursor:pointer;display:flex;align-items:center;justify-content:center">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+    </button>
+    <div class="ltr-card" style="position:relative;z-index:2;width:100%;max-width:760px">
+      <div class="ltr-tape" aria-hidden="true" style="position:absolute;top:-14px;left:50%;z-index:2;width:150px;height:40px;background:rgba(246,170,130,0.72);box-shadow:0 2px 6px rgba(0,0,0,0.08)"></div>
+      <div class="ltr-scroll" ref="{{ letterScrollRef }}" style="max-height:calc(100vh - 80px);overflow-y:auto;background:#FFFCF4;border-radius:14px;box-shadow:0 40px 80px rgba(0,0,0,0.5);padding:64px 64px 96px;font-family:'Caveat',cursive;color:#2A1A10">
+        <div class="ltr-photo">
+          <image-slot id="letter-photo" shape="rounded" radius="6" placeholder="Drop an illustration for your letter" style="width:100%;aspect-ratio:16/7.2;display:block"></image-slot>
+        </div>
+        <div class="ltr-meta" style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;margin:36px 0 22px">
+          <span style="font-weight:700;font-size:26px;color:#E0661A">A little note</span>
+          <span style="font-weight:500;font-size:22px;color:#6B5647">{{ letterDate }}</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:4px;font-weight:500;font-size:clamp(20px,2.4vw,26px);line-height:1.45">
+          <div class="ltr-line" style="--delay:1s;--dur:1.1s;margin-bottom:10px;width:fit-content;padding-right:12px"><img loading="lazy" src="opt/web/hi-there.webp" alt="Hi there!" decoding="async" style="width:clamp(170px,22vw,250px);height:auto;display:block;margin-left:calc(clamp(170px,22vw,250px) * -0.085);margin-top:calc(clamp(170px,22vw,250px) * -0.04);margin-bottom:calc(clamp(170px,22vw,250px) * -0.05);filter:brightness(0);opacity:0.88"></div>
+          <div class="ltr-line ltr-para" style="--delay:2.2s;--dur:2.9s;width:100%;text-align:justify;text-justify:inter-word;hyphens:auto;-webkit-hyphens:auto;text-wrap:pretty">Thanks for stopping by. I know you probably have a dozen tabs open, so this means a lot.</div>
+          <div class="ltr-line ltr-para" style="--delay:5.3s;--dur:6.3s;margin-top:18px;width:100%;text-align:justify;text-justify:inter-word;hyphens:auto;-webkit-hyphens:auto;text-wrap:pretty">For the last 5+ years I've designed products for people who don't have time to figure things out: delivery partners, operators and busy teams. Making the complicated feel obvious is what keeps me going.</div>
+          <div class="ltr-line ltr-para" style="--delay:11.9s;--dur:3s;margin-top:18px;width:100%;text-align:justify;text-justify:inter-word;hyphens:auto;-webkit-hyphens:auto;text-wrap:pretty">If something here made you curious, I'd love to hear from you. A call, a coffee, or just a hello.</div>
+          <div class="ltr-line" style="--delay:15s;--dur:1s;margin-top:18px;width:fit-content;padding-right:12px">Ring me on <a href="tel:+919787748686" style="color:#E0661A;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px">+91 97877 48686</a></div>
+          <div class="ltr-line" style="--delay:16.2s;--dur:.8s;margin-top:28px;width:fit-content;padding-right:8px">Warmly,</div>
+          <div class="ltr-line" style="--delay:17.1s;--dur:1.2s;width:fit-content;padding:6px 16px 0 0"><img loading="lazy" src="opt/web/signature.webp" alt="Surya" decoding="async" style="width:clamp(130px,16vw,180px);height:auto;display:block;margin-left:calc(clamp(130px,16vw,180px) * -0.14);margin-top:calc(clamp(130px,16vw,180px) * -0.03);filter:brightness(0);opacity:0.88"></div>
+        </div>
+      </div>
+      <button type="button" class="ltr-skip" onClick="{{ skipLetter }}" style="position:absolute;left:50%;bottom:-22px;z-index:3;display:inline-flex;align-items:center;gap:6px;background:#171717;color:#F5F4E8;border:1px solid rgba(245,244,232,0.12);font-family:Inter;font-weight:600;font-size:15px;padding:14px 24px;border-radius:100px;cursor:pointer;box-shadow:0 10px 24px rgba(0,0,0,0.35)" style-hover="background:#2A1A10">Skip to the end ↓</button>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { letterOpen: false, letterSkip: false, letterDone: false, letterRead: (() => { try { return localStorage.getItem('surya-letter-read') === '1'; } catch (e) { return false; } })() };
+  letterScrollRef = React.createRef();
+  openLetter = () => {
+    clearTimeout(this._ltrTimer);
+    try { localStorage.setItem('surya-letter-read', '1'); } catch (e) {}
+    if (this.letterScrollRef.current) this.letterScrollRef.current.scrollTop = 0;
+    this.setState({ letterOpen: true, letterSkip: false, letterDone: false, letterRead: true });
+    this._ltrTimer = setTimeout(() => this.setState({ letterDone: true }), 18600);
+  };
+  closeLetter = () => { clearTimeout(this._ltrTimer); this.setState({ letterOpen: false }); };
+  skipLetter = () => {
+    clearTimeout(this._ltrTimer);
+    this.setState({ letterSkip: true, letterDone: true });
+    requestAnimationFrame(() => requestAnimationFrame(() => { const el = this.letterScrollRef.current; if (el) el.scrollTop = el.scrollHeight; }));
+  };
+  componentDidMount() {
+    this._ltrKey = (e) => { if (e.key === 'Escape' && this.state.letterOpen) this.closeLetter(); };
+    document.addEventListener('keydown', this._ltrKey);
+  }
+  componentWillUnmount() { clearTimeout(this._ltrTimer); document.removeEventListener('keydown', this._ltrKey); }
+  renderVals() {
+    const st = this.state;
+    return {
+      openLetter: this.openLetter, closeLetter: this.closeLetter, skipLetter: this.skipLetter, letterScrollRef: this.letterScrollRef,
+      letterUnread: !st.letterRead,
+      letterBadgeClass: 'ltr-badge' + (st.letterRead ? '' : ' is-unread'),
+      letterDate: new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }),
+      letterRootClass: 'ltr-root' + (st.letterOpen ? ' is-open' : '') + (st.letterSkip ? ' is-skip' : '') + (st.letterDone ? ' is-done' : '')
+    };
+  }
+}
+</script>
+</body>
+</html>
